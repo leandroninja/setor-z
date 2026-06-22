@@ -236,6 +236,26 @@
     }
     .pi:hover { transform: scale(1.03); box-shadow: 0 8px 32px rgba(156,39,176,.3); }
 
+    /* RACAS */
+    #racas { background: var(--bg); }
+    .races-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+    }
+    .race-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-left: 3px solid var(--ac, var(--cyan));
+      border-radius: 8px; padding: 20px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .race-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.35); }
+    .race-img-w { flex-shrink: 0; width: 82px; height: 82px; display: flex; align-items: center; justify-content: center; }
+    .race-img-w img { max-width: 82px; max-height: 82px; width: auto; height: auto; filter: drop-shadow(0 0 10px rgba(0,229,255,.4)); }
+    .race-info { flex: 1; min-width: 0; }
+    .race-tag  { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 5px; color: var(--ac, var(--cyan)); }
+    .race-name { font-family: 'Orbitron', sans-serif; font-size: .88rem; font-weight: 700; color: var(--text); letter-spacing: .08em; margin-bottom: 8px; }
+    .race-desc { font-size: .77rem; color: var(--dim); line-height: 1.55; }
+
     /* TIMELINE */
     #dev { background: var(--bg); }
     .tl { max-width: 680px; margin: 0 auto; position: relative; }
@@ -313,6 +333,7 @@
   <ul class="nav-links">
     <li><a href="#features">Recursos</a></li>
     <li><a href="#naves">Naves</a></li>
+    <li><a href="#racas">Raças</a></li>
     <li><a href="#bosses">Bosses</a></li>
     <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#dev">Status</a></li>
@@ -451,6 +472,80 @@
       <img class="pi rv" src="assets/cutscene/panel_3.png" alt="Cena 3" loading="lazy" />
       <img class="pi rv" src="assets/cutscene/panel_4.png" alt="Cena 4" loading="lazy" />
       <img class="pi rv" src="assets/cutscene/panel_5.png" alt="Cena 5" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="racas">
+  <div class="container">
+    <h2 class="rv">As 7 Raças Aliadas</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Quando a Brecha Dimensional se abriu, sete civilizações inimigas deixaram suas guerras de lado e uniram forças contra a invasão Vorrkai</p>
+    <div class="races-grid">
+
+      <div class="race-card rv" style="--ac:#9c27b0">
+        <div class="race-img-w"><img src="assets/ships/p1stealthfrigatepurp.png" alt="Vorn'Silas" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Stealth Frigate</div>
+          <div class="race-name">Vorn'Silas</div>
+          <div class="race-desc">Os Velados da Dimensão Sombria. Mestres da furtividade e invisibilidade dimensional. Sua tecnologia de camuflagem os tornava indetectáveis a qualquer scanner — até a invasão Vorrkai identificar sua frequência de existência e torná-los alvo prioritário.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#00c853">
+        <div class="race-img-w"><img src="assets/ships/p2interceptorclassgr.png" alt="Xy'Reth" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Interceptor GR</div>
+          <div class="race-name">Xy'Reth</div>
+          <div class="race-desc">Os Caçadores dos Mundos de Cristal. Nascidos em gravidade tripla, seus reflexos superam qualquer IA de combate. Seus interceptores verdes são o terror das frotas inimigas em batalhas de curta distância — ninguém escapa de um Xy'Reth em perseguição.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#7b1fa2">
+        <div class="race-img-w"><img src="assets/ships/p3stealthfrigate.png" alt="Umbrath" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Dark Frigate</div>
+          <div class="race-name">Umbrath</div>
+          <div class="race-desc">Os Sentinelas da Brecha. Guardiões ancestrais das passagens dimensionais, os Umbrath monitoraram as brechas por milênios. Foram os primeiros a detectar a invasão Vorrkai — e os primeiros a pagar o preço com a destruição de seu sistema natal.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#ff6f00">
+        <div class="race-img-w"><img src="assets/ships/p4fantasysteal.png" alt="Phantasma" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Phantom</div>
+          <div class="race-name">Phantasma</div>
+          <div class="race-desc">Os Seres de Energia Pura. De forma fluida, os Phantasma canalizam energias de quatro dimensões distintas em seus propulsores únicos. Nenhuma outra civilização compreende completamente sua tecnologia de quatro turbinas — nem eles mesmos explicam ao certo como funciona.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#00e676">
+        <div class="race-img-w"><img src="assets/ships/p5greenfatasysteal.png" alt="Sylveth" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Green Phantom</div>
+          <div class="race-name">Sylveth</div>
+          <div class="race-desc">Os Guardiões dos Mundos Vivos. Protetores de planetas gêmeos com ecossistemas únicos, os Sylveth priorizaram escudo e resistência acima de tudo. Seus navios absorvem impactos que destruiriam qualquer outra frota — perdoem a lentidão, mas ninguém os derruba.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#40c4ff">
+        <div class="race-img-w"><img src="assets/ships/p6stealthfighter.png" alt="Cerulean" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Stealth Fighter</div>
+          <div class="race-name">Cerulean</div>
+          <div class="race-desc">Os Arquitetos Quânticos. Civilização hiper-tecnológica que alcançou singularidade há 3.000 ciclos estelares. Seus caças compactos operam em frequências de energia azul-branca que tornam seus escudos praticamente impenetráveis a projéteis convencionais.</div>
+        </div>
+      </div>
+
+      <div class="race-card rv" style="--ac:#ff6d00">
+        <div class="race-img-w"><img src="assets/ships/p7strikefighter.png" alt="Ignareth" loading="lazy" /></div>
+        <div class="race-info">
+          <div class="race-tag">Nave: Strike Fighter</div>
+          <div class="race-name">Ignareth</div>
+          <div class="race-desc">Os Guerreiros dos Mundos Vulcânicos. Nascidos em planetas de fogo e cinzas, os Ignareth nunca conheceram a paz. São os combatentes mais temidos da aliança e os que menos temem a morte — onde outros recuam, os Ignareth avançam.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
