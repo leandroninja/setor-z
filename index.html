@@ -368,6 +368,20 @@
     }
     .trailer-label { font-family: 'Orbitron', sans-serif; font-size: .72rem; color: var(--dim); letter-spacing: .18em; text-transform: uppercase; }
 
+    /* MUSIC BUTTON */
+    #music-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(3,8,18,.88); border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.35rem;
+      box-shadow: 0 2px 16px rgba(0,229,255,.18);
+      transition: border-color .2s, background .2s, transform .15s;
+      backdrop-filter: blur(8px);
+    }
+    #music-btn:hover { border-color: var(--cyan); background: rgba(0,229,255,.08); transform: scale(1.08); }
+    #music-btn.muted { border-color: rgba(255,255,255,.15); opacity: .55; }
+
     /* REVEAL */
     .rv { opacity: 0; transform: translateY(28px); transition: opacity .65s, transform .65s; }
     .rv.on { opacity: 1; transform: none; }
@@ -566,7 +580,7 @@
       </div>
       <div class="vorrkai-imgs rv">
         <img src="assets/vorrkai/vorrkai_frota.png" alt="A frota Vorrkai avança" loading="lazy" />
-        <img src="assets/vorrkai/vorrkai_nave.png" alt="Máquina de guerra Vorrkai — Ferríchos" loading="lazy" />
+        <img src="assets/vorrkai/vorrkai_nave.png" alt="Frota Vorrkai em combate — batalha espacial" loading="lazy" />
       </div>
     </div>
   </div>
@@ -746,7 +760,15 @@
   <div class="fl">SETOR <span>Z</span> — BRECHA DIMENSIONAL: INVASÃO VORRKAI</div>
   <div class="fc2">© 2026 Ninja Shadow Labs · Todos os direitos reservados</div>
   <div class="fdev">Desenvolvido por <a href="https://leandroninja.github.io" target="_blank" rel="noopener">Leandro Ninja</a></div>
+  <div class="fdev" style="margin-top:14px;">Entre em contato com o desenvolvedor:
+    <a href="mailto:riey21@hotmail.com">riey21@hotmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:suzukihell@gmail.com">suzukihell@gmail.com</a>
+  </div>
 </footer>
+
+<audio id="bgm" src="assets/audio/menu.mp3" loop preload="auto"></audio>
+<button id="music-btn" title="Música on/off">🔔</button>
 
 <script>
 (function () {
@@ -781,6 +803,37 @@
     e.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('on'); ob.unobserve(x.target); } });
   }, { threshold: 0.08 });
   els.forEach(function(el){ ob.observe(el); });
+})();
+
+(function () {
+  var bgm = document.getElementById('bgm');
+  var btn = document.getElementById('music-btn');
+  var playing = false;
+
+  function tryPlay() {
+    bgm.volume = 0.55;
+    bgm.play().then(function () {
+      playing = true;
+      btn.textContent = '🔔';
+      btn.classList.remove('muted');
+    }).catch(function () {});
+  }
+
+  document.addEventListener('click', function onFirst() {
+    if (!playing) tryPlay();
+    document.removeEventListener('click', onFirst);
+  }, { once: true });
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (!playing) {
+      tryPlay();
+    } else if (bgm.paused) {
+      bgm.play(); btn.textContent = '🔔'; btn.classList.remove('muted');
+    } else {
+      bgm.pause(); btn.textContent = '🔕'; btn.classList.add('muted');
+    }
+  });
 })();
 </script>
 </body>
