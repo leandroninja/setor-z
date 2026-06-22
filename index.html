@@ -368,6 +368,45 @@
     }
     .trailer-label { font-family: 'Orbitron', sans-serif; font-size: .72rem; color: var(--dim); letter-spacing: .18em; text-transform: uppercase; }
 
+    /* VORRKAI BOT */
+    #vbot {
+      position: fixed; bottom: 0; left: 20px; z-index: 997;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    #vbot-bubble {
+      background: rgba(6,2,18,.94);
+      border: 1px solid rgba(180,40,255,.55);
+      border-radius: 10px 10px 10px 0;
+      padding: 11px 34px 11px 13px;
+      max-width: 258px; min-height: 42px;
+      margin-bottom: 6px; position: relative;
+      font-size: .77rem; color: #ddb0ff; line-height: 1.58;
+      box-shadow: 0 4px 22px rgba(140,20,200,.32);
+      transition: opacity .3s, transform .3s;
+    }
+    #vbot-bubble::after {
+      content: ''; position: absolute; bottom: -9px; left: 16px;
+      border: 5px solid transparent;
+      border-top-color: rgba(180,40,255,.55);
+    }
+    #vbot-close {
+      position: absolute; top: 4px; right: 8px;
+      background: none; border: none;
+      color: rgba(180,80,255,.55); font-size: .95rem; cursor: pointer; line-height: 1;
+      padding: 0;
+    }
+    #vbot-close:hover { color: #ddb0ff; }
+    #vbot-img {
+      width: 108px; height: auto;
+      filter: drop-shadow(0 0 14px rgba(180,40,255,.55));
+      cursor: pointer; transition: transform .3s;
+      display: block;
+    }
+    #vbot-img:hover { transform: scale(1.06); }
+    .vbot-cursor { animation: vcblink .65s infinite; color: rgba(200,100,255,.75); }
+    @keyframes vcblink { 0%,100%{opacity:1} 50%{opacity:0} }
+    #vbot.vbot-hidden #vbot-bubble { opacity:0; pointer-events:none; transform:translateY(8px); }
+
     /* MUSIC BUTTON */
     #music-btn {
       position: fixed; bottom: 24px; right: 24px; z-index: 1000;
@@ -437,6 +476,9 @@
     <div class="btns">
       <a href="#apoie" class="btn btn-p">Apoie o Projeto</a>
       <a href="#screenshots" class="btn btn-o">Ver Screenshots</a>
+    </div>
+    <div style="margin-top:28px;opacity:.7;">
+      <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fleandroninja.github.io%2Fsetor-z%2F&count_bg=%2300b8d4&title_bg=%23030812&icon=&icon_color=%23ffffff&title=Visitantes&edge_flat=true" alt="Contador de visitantes" style="height:22px;" />
     </div>
   </div>
 </section>
@@ -770,6 +812,14 @@
 <audio id="bgm" src="assets/audio/menu.mp3" loop preload="auto"></audio>
 <button id="music-btn" title="Música on/off">🔔</button>
 
+<div id="vbot">
+  <div id="vbot-bubble">
+    <button id="vbot-close" title="Fechar">×</button>
+    <span id="vbot-text"></span><span class="vbot-cursor">▌</span>
+  </div>
+  <img id="vbot-img" src="assets/vorrkai/bot.png" alt="Vorrkai" />
+</div>
+
 <script>
 (function () {
   var c = document.getElementById('stars'), ctx = c.getContext('2d'), W, H, s = [];
@@ -795,6 +845,50 @@
   }
   addEventListener('resize', function(){ resize(); init(); });
   resize(); init(); draw();
+})();
+
+(function () {
+  var msgs = [
+    "Sua presença foi registrada nos arquivos Vorrkai...",
+    "Em breve, seu planeta será mais um na nossa coleção.",
+    "Aproveite enquanto pode. A invasão é inevitável.",
+    "Tudo que você ama... será consumido.",
+    "Nenhuma galáxia resistiu à nossa frota. A sua não será diferente.",
+    "Bem-vindo, criatura inferior. Obrigado por nos visitar.",
+    "Cada segundo que passa, a Brecha Dimensional se abre mais.",
+    "Seu mundo já está marcado. A contagem regressiva começou.",
+    "Resistir é inútil. Mas apreciamos o esforço.",
+    "Prepare-se. Os Vorrkai chegam — e não deixam nada para trás.",
+  ];
+  var el = document.getElementById('vbot-text');
+  var btn = document.getElementById('vbot-close');
+  var vbot = document.getElementById('vbot');
+  var vimg = document.getElementById('vbot-img');
+  var mi = 0, ci = 0, tid = null;
+
+  function typeNext() {
+    var msg = msgs[mi];
+    if (ci < msg.length) {
+      el.textContent += msg[ci++];
+      tid = setTimeout(typeNext, 38 + Math.random() * 22);
+    } else {
+      tid = setTimeout(function () {
+        el.textContent = ''; ci = 0;
+        mi = (mi + 1) % msgs.length;
+        typeNext();
+      }, 3400);
+    }
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    vbot.classList.add('vbot-hidden');
+  });
+  vimg.addEventListener('click', function () {
+    vbot.classList.remove('vbot-hidden');
+  });
+
+  setTimeout(typeNext, 1500);
 })();
 
 (function () {
