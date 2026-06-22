@@ -312,6 +312,62 @@
     .fdev { font-size: .74rem; color: var(--dim); margin-top: 6px; }
     .fdev a { color: var(--cyan); }
 
+    /* VORRKAI */
+    #vorrkai { background: linear-gradient(180deg, var(--bg2), #080005); }
+    .vorrkai-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+    .vorrkai-text h3 {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(.85rem, 2vw, 1.1rem);
+      color: #ff3333; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .vorrkai-text p { font-size: .87rem; color: var(--dim); line-height: 1.82; margin-bottom: 14px; }
+    .vorrkai-text strong { color: var(--text); }
+    .vorrkai-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,51,51,.18); }
+    .vs { text-align: center; }
+    .vsn { font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: #ff3333; display: block; text-shadow: 0 0 22px rgba(255,50,50,.45); }
+    .vsl { font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .vorrkai-imgs { display: flex; flex-direction: column; gap: 14px; }
+    .vorrkai-imgs img { border-radius: 8px; border: 1px solid rgba(255,50,50,.2); width: 100%; box-shadow: 0 4px 24px rgba(255,0,0,.12); }
+    @media (max-width: 840px) { .vorrkai-inner { grid-template-columns: 1fr; } }
+
+    /* BAZAR */
+    #bazar { background: var(--bg); }
+    .bazar-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .bazar-img { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.45); }
+    .bazar-img img { width: 100%; display: block; }
+    .bazar-items { display: flex; flex-direction: column; gap: 11px; }
+    .bz-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); border-radius: 8px;
+      padding: 13px 16px; display: flex; justify-content: space-between; align-items: center;
+      transition: border-left-color .25s, transform .25s;
+    }
+    .bz-item:hover { border-left-color: var(--cyan); transform: translateX(5px); }
+    .bz-name { font-family: 'Orbitron', sans-serif; font-size: .73rem; color: var(--text); letter-spacing: .07em; }
+    .bz-desc { font-size: .68rem; color: var(--dim); margin-top: 3px; }
+    .bz-pts { font-family: 'Orbitron', sans-serif; font-size: .8rem; font-weight: 700; color: var(--gold); white-space: nowrap; margin-left: 14px; }
+    @media (max-width: 840px) { .bazar-wrap { grid-template-columns: 1fr; } }
+
+    /* TRAILER */
+    #trailer { background: var(--bg2); }
+    .trailer-box {
+      max-width: 840px; margin: 0 auto; position: relative;
+      border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,229,255,.12);
+    }
+    .trailer-box img { width: 100%; display: block; filter: brightness(.65); }
+    .trailer-ov {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      background: rgba(3,8,18,.45);
+    }
+    .play-btn {
+      width: 74px; height: 74px; border-radius: 50%;
+      background: rgba(0,229,255,.12); border: 2px solid var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; cursor: default; transition: background .25s, transform .25s;
+    }
+    .trailer-label { font-family: 'Orbitron', sans-serif; font-size: .72rem; color: var(--dim); letter-spacing: .18em; text-transform: uppercase; }
+
     /* REVEAL */
     .rv { opacity: 0; transform: translateY(28px); transition: opacity .65s, transform .65s; }
     .rv.on { opacity: 1; transform: none; }
@@ -333,7 +389,9 @@
   <ul class="nav-links">
     <li><a href="#features">Recursos</a></li>
     <li><a href="#naves">Naves</a></li>
+    <li><a href="#vorrkai" style="color:#ff6666">Vorrkai</a></li>
     <li><a href="#racas">Raças</a></li>
+    <li><a href="#bazar">Bazar</a></li>
     <li><a href="#bosses">Bosses</a></li>
     <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#dev">Status</a></li>
@@ -476,6 +534,44 @@
   </div>
 </section>
 
+<section id="vorrkai">
+  <div class="container">
+    <h2 class="rv" style="color:#ff3333">Os Vorrkai</h2>
+    <div class="divider" style="background:linear-gradient(90deg,#ff3333,#9c27b0)"></div>
+    <p class="sub rv">400 anos de conquista. Galáxias inteiras consumidas. Agora é nossa vez de resistir.</p>
+    <div class="vorrkai-inner">
+      <div class="vorrkai-text rv">
+        <h3>A Ameaça que Veio do Além</h3>
+        <p>
+          Há quatro séculos, os Vorrkai surgiram das profundezas de uma dimensão sem nome —
+          uma civilização que não constrói, não negocia, não coexiste.
+          Eles <strong>consomem</strong>. Mundos inteiros reduzidos a matéria-prima.
+          Povos absorvidos, suas memórias e culturas apagadas como dados corrompidos.
+        </p>
+        <p>
+          Em 400 anos de expansão ininterrupta, os Vorrkai varreram 14 sistemas estelares,
+          subjugaram 37 civilizações e eliminaram tudo que não podiam controlar.
+          Sua frota é imparável. Suas máquinas de guerra, incompreensíveis em tamanho e violência.
+          E agora — pela primeira vez em sua história — encontraram resistência.
+        </p>
+        <p>
+          A Brecha Dimensional aberta sobre o SETOR Z não é apenas uma invasão.
+          É o início do fim — a menos que sete raças que nunca se aliaram antes decidam lutar juntas.
+        </p>
+        <div class="vorrkai-stats">
+          <div class="vs"><span class="vsn">400</span><span class="vsl">Anos de conquista</span></div>
+          <div class="vs"><span class="vsn">14</span><span class="vsl">Sistemas destruídos</span></div>
+          <div class="vs"><span class="vsn">37</span><span class="vsl">Civilizações subjugadas</span></div>
+        </div>
+      </div>
+      <div class="vorrkai-imgs rv">
+        <img src="assets/vorrkai/vorrkai_frota.png" alt="A frota Vorrkai avança" loading="lazy" />
+        <img src="assets/vorrkai/vorrkai_nave.png" alt="Máquina de guerra Vorrkai — Ferríchos" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="racas">
   <div class="container">
     <h2 class="rv">As 7 Raças Aliadas</h2>
@@ -550,6 +646,41 @@
   </div>
 </section>
 
+<section id="bazar">
+  <div class="container">
+    <h2 class="rv">Hub Bazar — Loja de Melhorias</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Entre as fases, visite o Bazar de Sucatas — troque pontos acumulados por upgrades que mudam o rumo da batalha</p>
+    <div class="bazar-wrap">
+      <div class="bazar-img rv">
+        <img src="assets/bazar/hub_bazar.png" alt="Hub Bazar — Reparos e Trocas" loading="lazy" />
+      </div>
+      <div class="bazar-items">
+        <div class="bz-item rv">
+          <div><div class="bz-name">Vida Extra</div><div class="bz-desc">+1 vida extra para a próxima fase</div></div>
+          <div class="bz-pts">3.000 pts</div>
+        </div>
+        <div class="bz-item rv">
+          <div><div class="bz-name">Propulsores Lv2</div><div class="bz-desc">Velocidade e manobrabilidade aumentadas</div></div>
+          <div class="bz-pts">2.000 pts</div>
+        </div>
+        <div class="bz-item rv">
+          <div><div class="bz-name">Armamento Lv2</div><div class="bz-desc">Firepower máximo com projéteis aprimorados</div></div>
+          <div class="bz-pts">5.000 pts</div>
+        </div>
+        <div class="bz-item rv">
+          <div><div class="bz-name">Depósito de Bombas</div><div class="bz-desc">+2 bombas especiais carregadas para a fase seguinte</div></div>
+          <div class="bz-pts">3.500 pts</div>
+        </div>
+        <div class="bz-item rv">
+          <div><div class="bz-name">Escudo Reforçado</div><div class="bz-desc">Resistência a impacto aumentada por uma fase</div></div>
+          <div class="bz-pts">4.000 pts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="dev">
   <div class="container">
     <h2 class="rv">Status de Desenvolvimento</h2>
@@ -561,6 +692,21 @@
       <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Áudio e Música Original</div><div class="td2">Trilha sonora e efeitos sonoros exclusivos para todas as ações de combate</div></div></div>
       <div class="ti rv"><div class="td wip">◐</div><div class="tc"><div class="tt">Polimento Final</div><div class="td2">Efeitos visuais avançados, mecânicas extras, modo dificuldade e ranking expandido</div></div></div>
       <div class="ti rv"><div class="td soon">○</div><div class="tc"><div class="tt">Lançamento na Steam</div><div class="td2">Previsão para os próximos 6 meses — com o apoio da comunidade</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="trailer">
+  <div class="container">
+    <h2 class="rv">Gameplay em Ação</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Trailer oficial em produção — preview do combate em tempo real</p>
+    <div class="trailer-box rv">
+      <img src="assets/gameplay_hud.png" alt="SETOR Z — combate em tempo real com HUD" loading="lazy" />
+      <div class="trailer-ov">
+        <div class="play-btn">▶</div>
+        <div class="trailer-label">Trailer completo em breve · YouTube</div>
+      </div>
     </div>
   </div>
 </section>
