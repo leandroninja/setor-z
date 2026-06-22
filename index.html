@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SETOR Z — Brecha Dimensional: Invasão Vorrkai</title>
+  <meta name="description" content="Space shooter épico com 18 fases, 18 bosses e 7 naves únicas. Em breve na Steam." />
+  <meta property="og:title" content="SETOR Z — Brecha Dimensional: Invasão Vorrkai" />
+  <meta property="og:description" content="Space shooter épico. 18 fases. 18 bosses. 7 naves. Em breve na Steam." />
+  <meta property="og:image" content="assets/bg/menu_bg.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #030812;
+      --bg2:      #06101f;
+      --bg3:      #0a1628;
+      --cyan:     #00e5ff;
+      --cyan2:    #00b8d4;
+      --purple:   #9c27b0;
+      --gold:     #ffd600;
+      --text:     #ccd6f6;
+      --dim:      #8892b0;
+      --border:   rgba(0,229,255,.14);
+      --card:     rgba(6,16,31,.88);
+      --gc:       0 0 24px rgba(0,229,255,.35);
+      --gp:       0 0 24px rgba(156,39,176,.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+    section { padding: 80px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-weight: 700; color: var(--cyan);
+      text-align: center; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .divider {
+      width: 70px; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      margin: 10px auto 36px; border-radius: 2px;
+    }
+    .sub {
+      text-align: center; color: var(--dim);
+      margin-bottom: 44px; font-size: .9rem;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(3,8,18,.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900; font-size: .78rem; letter-spacing: .14em; color: var(--cyan);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex; gap: 22px; list-style: none;
+      font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .nav-links a { color: var(--dim); transition: color .2s; }
+    .nav-links a:hover { color: var(--cyan); text-decoration: none; }
+    .btn-nav {
+      background: linear-gradient(135deg, var(--cyan2), var(--purple));
+      color: #fff !important; padding: 8px 16px; border-radius: 4px;
+      font-size: .73rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; white-space: nowrap; transition: opacity .2s;
+    }
+    .btn-nav:hover { opacity: .82; text-decoration: none; }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background: url('assets/bg/menu_bg.png') center/cover no-repeat;
+      overflow: hidden; padding: 120px 24px 80px;
+    }
+    .hero-ov { position: absolute; inset: 0; z-index: 0; background: rgba(3,8,18,.76); }
+    #stars    { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .hero-in  { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0,229,255,.09); border: 1px solid var(--border);
+      color: var(--cyan); font-size: .7rem; letter-spacing: .2em;
+      text-transform: uppercase; padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 7vw, 4.8rem);
+      line-height: 1.05; letter-spacing: .06em; text-transform: uppercase;
+      color: #fff; text-shadow: 0 0 50px rgba(0,229,255,.4); margin-bottom: 8px;
+    }
+    .hero-title .hs { color: var(--cyan); }
+    .hero-title .hz { color: var(--gold); text-shadow: 0 0 30px rgba(255,214,0,.45); }
+
+    .hero-sub {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(.7rem, 2vw, .92rem);
+      letter-spacing: .22em; color: var(--purple);
+      text-transform: uppercase; margin-bottom: 26px;
+    }
+
+    .hero-desc {
+      font-size: clamp(.88rem, 2vw, 1.05rem);
+      color: var(--dim); max-width: 600px; margin: 0 auto 40px; line-height: 1.75;
+    }
+
+    .stats {
+      display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; margin-bottom: 44px;
+    }
+    .stat { text-align: center; }
+    .sn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900;
+      color: var(--cyan); display: block; text-shadow: var(--gc);
+    }
+    .sl { font-size: .63rem; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+
+    .btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 14px 34px; border-radius: 4px;
+      font-size: .83rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; transition: all .25s;
+    }
+    .btn-p {
+      background: linear-gradient(135deg, var(--cyan2), #0077b6); color: #fff;
+      box-shadow: 0 4px 22px rgba(0,229,255,.3);
+    }
+    .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,229,255,.5); text-decoration: none; color: #fff; }
+    .btn-o { border: 1.5px solid var(--purple); color: var(--purple); }
+    .btn-o:hover { background: rgba(156,39,176,.14); transform: translateY(-2px); text-decoration: none; color: var(--purple); }
+
+    /* FEATURES */
+    #features { background: var(--bg2); }
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px;
+    }
+    .fc {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 28px 18px; text-align: center; transition: border-color .3s, transform .3s;
+    }
+    .fc:hover { border-color: var(--cyan); transform: translateY(-4px); }
+    .fi { font-size: 2rem; margin-bottom: 12px; }
+    .ft {
+      font-family: 'Orbitron', sans-serif; font-size: .76rem;
+      color: var(--cyan); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .fd { font-size: .79rem; color: var(--dim); line-height: 1.55; }
+
+    /* SHIPS */
+    #naves { background: var(--bg); }
+    .ships {
+      display: flex; gap: 18px; overflow-x: auto; padding-bottom: 14px;
+      scroll-snap-type: x mandatory;
+    }
+    .ships::-webkit-scrollbar { height: 4px; }
+    .ships::-webkit-scrollbar-track { background: var(--bg3); }
+    .ships::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 2px; }
+    .sc {
+      flex: 0 0 210px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px; scroll-snap-align: start;
+      transition: border-color .3s, transform .3s; text-align: center;
+    }
+    .sc:hover { border-color: var(--cyan); transform: translateY(-4px); }
+    .sw { height: 108px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .sw img { max-height: 100px; width: auto; filter: drop-shadow(0 0 14px rgba(0,229,255,.45)); }
+    .sn2 {
+      font-family: 'Orbitron', sans-serif; font-size: .74rem;
+      color: var(--cyan); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .sd { font-size: .73rem; color: var(--dim); line-height: 1.45; }
+
+    /* BOSSES */
+    #bosses { background: var(--bg2); }
+    .bg-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 13px;
+    }
+    .bc {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; transition: border-color .3s, transform .3s;
+    }
+    .bc:hover { border-color: var(--purple); transform: translateY(-3px); box-shadow: var(--gp); }
+    .bi {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover;
+      filter: brightness(.85) saturate(1.2); transition: filter .3s;
+    }
+    .bc:hover .bi { filter: brightness(1.05) saturate(1.5); }
+    .bl {
+      padding: 7px 8px; font-size: .59rem; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--dim); text-align: center;
+    }
+
+    /* SCREENSHOTS */
+    #screenshots { background: var(--bg); }
+    .sg {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 11px;
+    }
+    .si {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      border-radius: 6px; border: 1px solid var(--border);
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+    .si:hover { transform: scale(1.04); border-color: var(--cyan); box-shadow: var(--gc); }
+
+    /* HISTORIA */
+    #historia { background: var(--bg2); }
+    .pg { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 11px; }
+    .pi {
+      width: 100%; border-radius: 6px; border: 1px solid var(--border);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .pi:hover { transform: scale(1.03); box-shadow: 0 8px 32px rgba(156,39,176,.3); }
+
+    /* TIMELINE */
+    #dev { background: var(--bg); }
+    .tl { max-width: 680px; margin: 0 auto; position: relative; }
+    .tl::before {
+      content: ''; position: absolute; left: 19px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--cyan), var(--purple));
+    }
+    .ti { display: flex; gap: 22px; margin-bottom: 28px; }
+    .td {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .88rem; border: 2px solid; background: var(--bg); position: relative; z-index: 1;
+    }
+    .td.done { border-color: var(--cyan); color: var(--cyan); background: rgba(0,229,255,.08); }
+    .td.wip  { border-color: var(--gold); color: var(--gold); background: rgba(255,214,0,.08); }
+    .td.soon { border-color: var(--dim);  color: var(--dim); }
+    .tc { padding-top: 7px; }
+    .tt { font-family: 'Orbitron', sans-serif; font-size: .79rem; color: var(--text); letter-spacing: .08em; margin-bottom: 4px; }
+    .td2 { font-size: .76rem; color: var(--dim); }
+
+    /* APOIE */
+    #apoie { background: linear-gradient(180deg, var(--bg2), var(--bg)); text-align: center; }
+    .ab {
+      max-width: 660px; margin: 0 auto; background: var(--card);
+      border: 1px solid var(--border); border-radius: 14px; padding: 52px 36px;
+    }
+    .at {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.75rem); font-weight: 900;
+      color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .ad { color: var(--dim); margin-bottom: 32px; font-size: .92rem; line-height: 1.75; }
+    .tiers { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .tier {
+      background: rgba(0,229,255,.05); border: 1px solid var(--border); border-radius: 8px;
+      padding: 18px 20px; text-align: center; min-width: 132px;
+      transition: border-color .3s, transform .3s;
+    }
+    .tier:hover { border-color: var(--cyan); transform: translateY(-2px); }
+    .tp { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900; color: var(--cyan); display: block; }
+    .tl2 { font-size: .67rem; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; display: block; margin-top: 4px; }
+    .tk { font-size: .71rem; color: var(--dim); margin-top: 8px; line-height: 1.5; }
+
+    /* FOOTER */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 44px 24px; text-align: center; }
+    .fst { margin-bottom: 16px; }
+    .fst img { height: 46px; margin: 0 auto; opacity: .82; }
+    .fl {
+      font-family: 'Orbitron', sans-serif; font-size: .82rem; font-weight: 900;
+      color: var(--cyan); letter-spacing: .14em; margin-bottom: 10px;
+    }
+    .fl span { color: var(--gold); }
+    .fc2 { font-size: .71rem; color: var(--dim); }
+    .fdev { font-size: .74rem; color: var(--dim); margin-top: 6px; }
+    .fdev a { color: var(--cyan); }
+
+    /* REVEAL */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .65s, transform .65s; }
+    .rv.on { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      section { padding: 60px 16px; }
+    }
+    @media (max-width: 480px) {
+      .ab { padding: 32px 18px; }
+      .bg-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SETOR <span>Z</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Recursos</a></li>
+    <li><a href="#naves">Naves</a></li>
+    <li><a href="#bosses">Bosses</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#dev">Status</a></li>
+    <li><a href="#apoie">Apoie</a></li>
+  </ul>
+  <a href="#apoie" class="btn-nav">Apoie o Projeto</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-ov"></div>
+  <canvas id="stars"></canvas>
+  <div class="hero-in">
+    <div class="badge">Em desenvolvimento &nbsp;·&nbsp; PC &nbsp;·&nbsp; Em breve na Steam</div>
+    <h1 class="hero-title">
+      <span class="hs">SETOR</span>&nbsp;<span class="hz">Z</span>
+    </h1>
+    <p class="hero-sub">Brecha Dimensional: Invasão Vorrkai</p>
+    <p class="hero-desc">
+      Um space shooter épico onde as fronteiras entre dimensões se rompem.
+      Pilote 7 naves únicas, enfrente 18 bosses devastadores e salve o universo
+      da invasão Vorrkai em 18 fases de combate intenso.
+    </p>
+    <div class="stats">
+      <div class="stat"><span class="sn">18</span><span class="sl">Fases</span></div>
+      <div class="stat"><span class="sn">18</span><span class="sl">Bosses</span></div>
+      <div class="stat"><span class="sn">7</span><span class="sl">Naves</span></div>
+      <div class="stat"><span class="sn">PC</span><span class="sl">Plataforma</span></div>
+    </div>
+    <div class="btns">
+      <a href="#apoie" class="btn btn-p">Apoie o Projeto</a>
+      <a href="#screenshots" class="btn btn-o">Ver Screenshots</a>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <h2 class="rv">Recursos do Jogo</h2>
+    <div class="divider"></div>
+    <div class="feat-grid">
+      <div class="fc rv"><div class="fi">🚀</div><div class="ft">7 Naves Únicas</div><div class="fd">Cada nave com aparência, velocidade e sistema de propulsão distintos com arte original</div></div>
+      <div class="fc rv"><div class="fi">💥</div><div class="ft">18 Bosses Épicos</div><div class="fd">Chefes massivos com padrões de ataque únicos, arte original e projéteis exclusivos</div></div>
+      <div class="fc rv"><div class="fi">🌌</div><div class="ft">18 Fases</div><div class="fd">Ambientes espaciais distintos: nebulosas, zonas de guerra e setores dimensionais</div></div>
+      <div class="fc rv"><div class="fi">🎬</div><div class="ft">Cutscenes</div><div class="fd">História narrada em painéis animados de abertura, fases e encerramento épico</div></div>
+      <div class="fc rv"><div class="fi">💣</div><div class="ft">Bombas Especiais</div><div class="fd">Arma de área com poder devastador para momentos críticos de combate</div></div>
+      <div class="fc rv"><div class="fi">🏆</div><div class="ft">Ranking</div><div class="fd">Dispute a maior pontuação e registre seu nome na glória intergaláctica</div></div>
+      <div class="fc rv"><div class="fi">🎵</div><div class="ft">Trilha Original</div><div class="fd">Música e efeitos sonoros exclusivos para cada fase e momento de combate</div></div>
+      <div class="fc rv"><div class="fi">🔥</div><div class="ft">Rastros de Motor</div><div class="fd">Efeito de partículas nas turbinas de cada nave com cores e estilos únicos</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="naves">
+  <div class="container">
+    <h2 class="rv">As 7 Naves</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Cada nave com características únicas de velocidade, firepower e defesa — role para ver todas</p>
+    <div class="ships">
+      <div class="sc"><div class="sw"><img src="assets/ships/p1stealthfrigatepurp.png" alt="Stealth Frigate" loading="lazy" /></div><div class="sn2">Stealth Frigate</div><div class="sd">Furtiva e resistente. Difícil de detectar. Disparos duplos de plasma roxo.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p2interceptorclassgr.png" alt="Interceptor GR" loading="lazy" /></div><div class="sn2">Interceptor GR</div><div class="sd">Velocidade alta. Ideal para hit-and-run. Três canhões de energia verde.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p3stealthfrigate.png" alt="Dark Frigate" loading="lazy" /></div><div class="sn2">Dark Frigate</div><div class="sd">Alta furtividade. Opera nas sombras. Disparo duplo de alta precisão.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p4fantasysteal.png" alt="Phantom" loading="lazy" /></div><div class="sn2">Phantom</div><div class="sd">Design exótico. Firepower elevado. Quatro turbinas multicoloridas.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p5greenfatasysteal.png" alt="Green Phantom" loading="lazy" /></div><div class="sn2">Green Phantom</div><div class="sd">Versão verde. Mais escudo, menos velocidade. Triplo disparo cósmico.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p6stealthfighter.png" alt="Stealth Fighter" loading="lazy" /></div><div class="sn2">Stealth Fighter</div><div class="sd">Compacto e rápido. Alta evasão. Canhões azul-brancos de alta cadência.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p7strikefighter.png" alt="Strike Fighter" loading="lazy" /></div><div class="sn2">Strike Fighter</div><div class="sd">Especialista em ataque. Máximo dano. Propulsão laranja-negra devastadora.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="bosses">
+  <div class="container">
+    <h2 class="rv">18 Bosses</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Cada chefe com arte original, padrão de ataque único e projéteis exclusivos</p>
+    <div class="bg-grid">
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossplasmaleviathan.png" alt="Plasma Leviathan" loading="lazy" /><div class="bl">Plasma Leviathan</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossstar-consumer.png" alt="Star Consumer" loading="lazy" /><div class="bl">Star Consumer</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossancientmechano-titan.png" alt="Ancient Mechano-Titan" loading="lazy" /><div class="bl">Ancient Mechano-Titan</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossapocalypticcarrierdreadnought.png" alt="Apocalyptic Carrier" loading="lazy" /><div class="bl">Apocalyptic Carrier</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bosschrono-wraith.png" alt="Chrono-Wraith" loading="lazy" /><div class="bl">Chrono-Wraith</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossvoidstalker.png" alt="Void Stalker" loading="lazy" /><div class="bl">Void Stalker</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossneuralnexusguardian.png" alt="Neural Nexus Guardian" loading="lazy" /><div class="bl">Neural Nexus Guardian</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossrift-walkerdread.png" alt="Rift-Walker Dread" loading="lazy" /><div class="bl">Rift-Walker Dread</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossskyfortressodyssey.png" alt="Sky Fortress Odyssey" loading="lazy" /><div class="bl">Sky Fortress Odyssey</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossthesingularitycore.png" alt="The Singularity Core" loading="lazy" /><div class="bl">The Singularity Core</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bosspredatorgunshipzodiac.png" alt="Predator Gunship Zodiac" loading="lazy" /><div class="bl">Predator Gunship Zodiac</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossorbitalstrikeplataformalpha.png" alt="Orbital Strike Platform" loading="lazy" /><div class="bl">Orbital Strike Platform</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossthefinalchrono-sentinel.png" alt="Final Chrono-Sentinel" loading="lazy" /><div class="bl">Final Chrono-Sentinel</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossstealthdreadnoughtomega.png" alt="Stealth Dreadnought Omega" loading="lazy" /><div class="bl">Stealth Dreadnought Omega</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bosstectonicbreaker.png" alt="Tectonic Breaker" loading="lazy" /><div class="bl">Tectonic Breaker</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossterraformingabomination.png" alt="Terraforming Abomination" loading="lazy" /><div class="bl">Terraforming Abomination</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossthecyber-arachnid.png" alt="The Cyber-Arachnid" loading="lazy" /><div class="bl">The Cyber-Arachnid</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bosstheironreaver.png" alt="The Iron Reaver" loading="lazy" /><div class="bl">The Iron Reaver</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossadvancedsiegemechzero.png" alt="Advanced Siege Mech Zero" loading="lazy" /><div class="bl">Advanced Siege Mech</div></div>
+      <div class="bc rv"><img class="bi" src="assets/bosses/bossaisqarm-colossus.png" alt="Aisqarm Colossus" loading="lazy" /><div class="bl">Aisqarm Colossus</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="screenshots">
+  <div class="container">
+    <h2 class="rv">Screenshots</h2>
+    <div class="divider"></div>
+    <p class="sub rv">18 ambientes espaciais únicos — de nebulosas a setores dimensionais</p>
+    <div class="sg">
+      <img class="si rv" src="assets/bg/phase1_combat_bg.png"  alt="Fase 1"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase2_combat_bg.png"  alt="Fase 2"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase3_combat_bg.png"  alt="Fase 3"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase4_combat_bg.png"  alt="Fase 4"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase5_combat_bg.png"  alt="Fase 5"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase6_combat_bg.png"  alt="Fase 6"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase7_combat_bg.png"  alt="Fase 7"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase8_combat_bg.png"  alt="Fase 8"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase9_combat_bg.png"  alt="Fase 9"  loading="lazy" />
+      <img class="si rv" src="assets/bg/phase10_combat_bg.png" alt="Fase 10" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase11_combat_bg.png" alt="Fase 11" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase12_combat_bg.png" alt="Fase 12" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase13_combat_bg.png" alt="Fase 13" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase14_combat_bg.png" alt="Fase 14" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase15_combat_bg.png" alt="Fase 15" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase16_combat_bg.png" alt="Fase 16" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase17_combat_bg.png" alt="Fase 17" loading="lazy" />
+      <img class="si rv" src="assets/bg/phase18_combat_bg.png" alt="Fase 18" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="container">
+    <h2 class="rv">A História</h2>
+    <div class="divider"></div>
+    <p class="sub rv">Quando a Brecha Dimensional se abre, a invasão Vorrkai começa — narrada em cutscenes animadas</p>
+    <div class="pg">
+      <img class="pi rv" src="assets/cutscene/panel_1.png" alt="Cena 1" loading="lazy" />
+      <img class="pi rv" src="assets/cutscene/panel_2.png" alt="Cena 2" loading="lazy" />
+      <img class="pi rv" src="assets/cutscene/panel_3.png" alt="Cena 3" loading="lazy" />
+      <img class="pi rv" src="assets/cutscene/panel_4.png" alt="Cena 4" loading="lazy" />
+      <img class="pi rv" src="assets/cutscene/panel_5.png" alt="Cena 5" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="dev">
+  <div class="container">
+    <h2 class="rv">Status de Desenvolvimento</h2>
+    <div class="divider"></div>
+    <div class="tl">
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Core do Jogo Completo</div><div class="td2">18 fases, 18 bosses, 7 naves, sistema de tiros, bombas, vidas e colisão</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Arte e Sprites Originais</div><div class="td2">Todas as naves, bosses, inimigos e cenários com arte criada exclusivamente para o jogo</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Cutscenes e Narrativa</div><div class="td2">Cutscenes de abertura, encerramento pós-créditos e narrativa entre fases</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Áudio e Música Original</div><div class="td2">Trilha sonora e efeitos sonoros exclusivos para todas as ações de combate</div></div></div>
+      <div class="ti rv"><div class="td wip">◐</div><div class="tc"><div class="tt">Polimento Final</div><div class="td2">Efeitos visuais avançados, mecânicas extras, modo dificuldade e ranking expandido</div></div></div>
+      <div class="ti rv"><div class="td soon">○</div><div class="tc"><div class="tt">Lançamento na Steam</div><div class="td2">Previsão para os próximos 6 meses — com o apoio da comunidade</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="apoie">
+  <div class="container">
+    <div class="ab rv">
+      <div class="at">Apoie o Projeto</div>
+      <p class="ad">
+        SETOR Z está quase pronto. Com o seu apoio podemos finalizar os últimos polimentos,
+        publicar na Steam e continuar desenvolvendo conteúdo extra como novos modos de jogo,
+        naves adicionais e expansões de história. Cada apoiador garante o futuro da galáxia.
+      </p>
+      <div class="tiers">
+        <div class="tier"><span class="tp">R$15</span><span class="tl2">Recruta</span><div class="tk">Cópia digital do jogo na Steam</div></div>
+        <div class="tier"><span class="tp">R$35</span><span class="tl2">Piloto</span><div class="tk">Jogo + nome nos créditos</div></div>
+        <div class="tier"><span class="tp">R$80</span><span class="tl2">Comandante</span><div class="tk">Jogo + créditos + acesso beta antecipado</div></div>
+      </div>
+      <a href="#" class="btn btn-p" style="font-size:.92rem;padding:15px 42px;">
+        Apoiar no Kickstarter
+      </a>
+      <p style="margin-top:18px;font-size:.73rem;color:var(--dim);">
+        Link da campanha em breve &nbsp;·&nbsp; Dúvidas?
+        <a href="mailto:riey21@hotmail.com">Entre em contato</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fst"><img src="assets/cutscene/ninja_shadow_labs.png" alt="Ninja Shadow Labs" /></div>
+  <div class="fl">SETOR <span>Z</span> — BRECHA DIMENSIONAL: INVASÃO VORRKAI</div>
+  <div class="fc2">© 2026 Ninja Shadow Labs · Todos os direitos reservados</div>
+  <div class="fdev">Desenvolvido por <a href="https://leandroninja.github.io" target="_blank" rel="noopener">Leandro Ninja</a></div>
+</footer>
+
+<script>
+(function () {
+  var c = document.getElementById('stars'), ctx = c.getContext('2d'), W, H, s = [];
+  function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
+  function init() {
+    s = [];
+    for (var i = 0, n = Math.floor(W * H / 2800); i < n; i++)
+      s.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+.2,
+               a: Math.random(), da: (Math.random()-.5)*.006, sp: Math.random()*.12+.02 });
+  }
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    for (var i = 0; i < s.length; i++) {
+      var p = s[i];
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(200,220,255,'+Math.max(0,Math.min(1,p.a))+')';
+      ctx.fill();
+      p.a += p.da; p.y += p.sp;
+      if (p.a>1||p.a<0) p.da*=-1;
+      if (p.y>H) { p.y=0; p.x=Math.random()*W; }
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize', function(){ resize(); init(); });
+  resize(); init(); draw();
+})();
+
+(function () {
+  var els = document.querySelectorAll('.rv');
+  var ob = new IntersectionObserver(function(e) {
+    e.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('on'); ob.unobserve(x.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){ ob.observe(el); });
+})();
+</script>
+</body>
+</html>
