@@ -899,7 +899,8 @@ var I18N = {
     btn_catarse:"Apoiar no Catarse",btn_indiegogo:"Apoiar no Indiegogo",
     apoie_links:"Links das campanhas em breve · Dúvidas?",apoie_contact:"Entre em contato",
     footer_copy:"© 2026 Ninja Shadow Labs · Todos os direitos reservados",
-    footer_dev:"Desenvolvido por",footer_contact:"Entre em contato com o desenvolvedor:"
+    footer_dev:"Desenvolvido por",footer_contact:"Entre em contato com o desenvolvedor:",
+    vbot_msgs:["Sua presença foi registrada nos arquivos Vorrkai...","Em breve, seu planeta será mais um na nossa coleção.","Aproveite enquanto pode. A invasão é inevitável.","Tudo que você ama... será consumido.","Nenhuma galáxia resistiu à nossa frota. A sua não será diferente.","Bem-vindo, criatura inferior. Obrigado por nos visitar.","Cada segundo que passa, a Brecha Dimensional se abre mais.","Seu mundo já está marcado. A contagem regressiva começou.","Resistir é inútil. Mas apreciamos o esforço.","Prepare-se. Os Vorrkai chegam — e não deixam nada para trás."]
   },
   en: {
     nav_recursos:"Features",nav_naves:"Ships",nav_vorrkai:"Vorrkai",nav_racas:"Races",nav_bazar:"Bazar",nav_bosses:"Bosses",nav_screenshots:"Screenshots",nav_dev:"Status",nav_apoie:"Support",nav_btn:"Support the Project",
@@ -963,7 +964,8 @@ var I18N = {
     btn_catarse:"Support on Catarse",btn_indiegogo:"Support on Indiegogo",
     apoie_links:"Campaign links coming soon · Questions?",apoie_contact:"Get in touch",
     footer_copy:"© 2026 Ninja Shadow Labs · All rights reserved",
-    footer_dev:"Developed by",footer_contact:"Contact the developer:"
+    footer_dev:"Developed by",footer_contact:"Contact the developer:",
+    vbot_msgs:["Your presence has been logged in the Vorrkai archives...","Soon, your planet will be another addition to our collection.","Enjoy it while you can. The invasion is inevitable.","Everything you love... will be consumed.","No galaxy has resisted our fleet. Yours will be no different.","Welcome, inferior creature. Thank you for visiting us.","Every second that passes, the Dimensional Rift opens wider.","Your world is already marked. The countdown has begun.","Resistance is futile. But we appreciate the effort.","Prepare yourself. The Vorrkai are coming — and they leave nothing behind."]
   },
   es: {
     nav_recursos:"Características",nav_naves:"Naves",nav_vorrkai:"Vorrkai",nav_racas:"Razas",nav_bazar:"Bazar",nav_bosses:"Jefes",nav_screenshots:"Capturas",nav_dev:"Estado",nav_apoie:"Apoyar",nav_btn:"Apoyar el Proyecto",
@@ -1027,12 +1029,16 @@ var I18N = {
     btn_catarse:"Apoyar en Catarse",btn_indiegogo:"Apoyar en Indiegogo",
     apoie_links:"Enlaces de campaña próximamente · ¿Preguntas?",apoie_contact:"Contáctanos",
     footer_copy:"© 2026 Ninja Shadow Labs · Todos los derechos reservados",
-    footer_dev:"Desarrollado por",footer_contact:"Contacta al desarrollador:"
+    footer_dev:"Desarrollado por",footer_contact:"Contacta al desarrollador:",
+    vbot_msgs:["Tu presencia ha sido registrada en los archivos Vorrkai...","Pronto, tu planeta será uno más en nuestra colección.","Disfrútalo mientras puedas. La invasión es inevitable.","Todo lo que amas... será consumido.","Ninguna galaxia ha resistido nuestra flota. La tuya no será diferente.","Bienvenido, criatura inferior. Gracias por visitarnos.","Cada segundo que pasa, la Brecha Dimensional se abre más.","Tu mundo ya está marcado. La cuenta regresiva ha comenzado.","Resistir es inútil. Pero apreciamos el esfuerzo.","Prepárate. Los Vorrkai vienen — y no dejan nada atrás."]
   }
 };
 
+var currentLang = 'pt';
+
 function setLang(lang) {
   var t = I18N[lang]; if (!t) return;
+  currentLang = lang;
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var k = el.getAttribute('data-i18n'); if (t[k] !== undefined) el.textContent = t[k];
@@ -1044,6 +1050,7 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
   try { localStorage.setItem('sz-lang', lang); } catch(e) {}
+  if (typeof resetBot === 'function') resetBot();
 }
 
 document.querySelectorAll('.lang-btn').forEach(function(btn) {
@@ -1087,18 +1094,6 @@ document.querySelectorAll('.lang-btn').forEach(function(btn) {
    VORRKAI BOT
    ============================================================ */
 (function () {
-  var msgs = [
-    "Sua presença foi registrada nos arquivos Vorrkai...",
-    "Em breve, seu planeta será mais um na nossa coleção.",
-    "Aproveite enquanto pode. A invasão é inevitável.",
-    "Tudo que você ama... será consumido.",
-    "Nenhuma galáxia resistiu à nossa frota. A sua não será diferente.",
-    "Bem-vindo, criatura inferior. Obrigado por nos visitar.",
-    "Cada segundo que passa, a Brecha Dimensional se abre mais.",
-    "Seu mundo já está marcado. A contagem regressiva começou.",
-    "Resistir é inútil. Mas apreciamos o esforço.",
-    "Prepare-se. Os Vorrkai chegam — e não deixam nada para trás.",
-  ];
   var el = document.getElementById('vbot-text');
   var btn = document.getElementById('vbot-close');
   var vbot = document.getElementById('vbot');
@@ -1106,18 +1101,25 @@ document.querySelectorAll('.lang-btn').forEach(function(btn) {
   var mi = 0, ci = 0, tid = null;
 
   function typeNext() {
-    var msg = msgs[mi];
+    var msgs = I18N[currentLang].vbot_msgs;
+    var msg = msgs[mi % msgs.length];
     if (ci < msg.length) {
       el.textContent += msg[ci++];
       tid = setTimeout(typeNext, 38 + Math.random() * 22);
     } else {
       tid = setTimeout(function () {
         el.textContent = ''; ci = 0;
-        mi = (mi + 1) % msgs.length;
+        mi = (mi + 1) % I18N[currentLang].vbot_msgs.length;
         typeNext();
       }, 3400);
     }
   }
+
+  window.resetBot = function () {
+    clearTimeout(tid);
+    el.textContent = ''; mi = 0; ci = 0;
+    typeNext();
+  };
 
   btn.addEventListener('click', function (e) {
     e.stopPropagation();
