@@ -91,6 +91,20 @@
     }
     .btn-nav:hover { opacity: .82; text-decoration: none; }
 
+    /* LANG SELECTOR */
+    #lang-sel { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+    .lang-btn {
+      background: none; border: 1px solid rgba(0,229,255,.28);
+      color: var(--dim); font-size: .64rem; letter-spacing: .1em;
+      padding: 4px 9px; border-radius: 3px; cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      font-family: 'Exo 2', sans-serif; font-weight: 600;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(0,229,255,.09);
+    }
+
     /* HERO */
     #hero {
       position: relative; min-height: 100vh;
@@ -350,23 +364,14 @@
     /* TRAILER */
     #trailer { background: var(--bg2); }
     .trailer-box {
-      max-width: 840px; margin: 0 auto; position: relative;
+      max-width: 840px; margin: 0 auto;
       border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
       box-shadow: 0 8px 40px rgba(0,229,255,.12);
     }
-    .trailer-box img { width: 100%; display: block; filter: brightness(.65); }
-    .trailer-ov {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px;
-      background: rgba(3,8,18,.45);
+    .trailer-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
+    .trailer-ratio iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
     }
-    .play-btn {
-      width: 74px; height: 74px; border-radius: 50%;
-      background: rgba(0,229,255,.12); border: 2px solid var(--cyan);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.7rem; cursor: default; transition: background .25s, transform .25s;
-    }
-    .trailer-label { font-family: 'Orbitron', sans-serif; font-size: .72rem; color: var(--dim); letter-spacing: .18em; text-transform: uppercase; }
 
     /* VORRKAI BOT */
     #vbot {
@@ -443,85 +448,90 @@
     <img src="https://visitor-badge.laobi.icu/badge?page_id=leandroninja.setor-z&left_color=%23050d1e&right_color=%2300b8d4&left_text=Visitantes" alt="Visitantes" style="height:20px;opacity:.85;" />
   </div>
   <ul class="nav-links">
-    <li><a href="#features">Recursos</a></li>
-    <li><a href="#naves">Naves</a></li>
-    <li><a href="#vorrkai" style="color:#ff6666">Vorrkai</a></li>
-    <li><a href="#racas">Raças</a></li>
-    <li><a href="#bazar">Bazar</a></li>
-    <li><a href="#bosses">Bosses</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#dev">Status</a></li>
-    <li><a href="#apoie">Apoie</a></li>
+    <li><a href="#features" data-i18n="nav_recursos">Recursos</a></li>
+    <li><a href="#naves" data-i18n="nav_naves">Naves</a></li>
+    <li><a href="#vorrkai" style="color:#ff6666" data-i18n="nav_vorrkai">Vorrkai</a></li>
+    <li><a href="#racas" data-i18n="nav_racas">Raças</a></li>
+    <li><a href="#bazar" data-i18n="nav_bazar">Bazar</a></li>
+    <li><a href="#bosses" data-i18n="nav_bosses">Bosses</a></li>
+    <li><a href="#screenshots" data-i18n="nav_screenshots">Screenshots</a></li>
+    <li><a href="#dev" data-i18n="nav_dev">Status</a></li>
+    <li><a href="#apoie" data-i18n="nav_apoie">Apoie</a></li>
   </ul>
-  <a href="#apoie" class="btn-nav">Apoie o Projeto</a>
+  <div id="lang-sel">
+    <button class="lang-btn active" data-lang="pt">PT</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
+  <a href="#apoie" class="btn-nav" data-i18n="nav_btn">Apoie o Projeto</a>
 </nav>
 
 <section id="hero">
   <div class="hero-ov"></div>
   <canvas id="stars"></canvas>
   <div class="hero-in">
-    <div class="badge">Em desenvolvimento &nbsp;·&nbsp; PC &nbsp;·&nbsp; Em breve na Steam</div>
+    <div class="badge" data-i18n="hero_badge">Em desenvolvimento &nbsp;·&nbsp; PC &nbsp;·&nbsp; Em breve na Steam</div>
     <h1 class="hero-title">
       <span class="hs">SETOR</span>&nbsp;<span class="hz">Z</span>
     </h1>
     <p class="hero-sub">Brecha Dimensional: Invasão Vorrkai</p>
-    <p class="hero-desc">
+    <p class="hero-desc" data-i18n="hero_desc">
       Um space shooter épico onde as fronteiras entre dimensões se rompem.
       Pilote 7 naves únicas, enfrente 18 bosses devastadores e salve o universo
       da invasão Vorrkai em 18 fases de combate intenso.
     </p>
     <div class="stats">
-      <div class="stat"><span class="sn">18</span><span class="sl">Fases</span></div>
-      <div class="stat"><span class="sn">18</span><span class="sl">Bosses</span></div>
-      <div class="stat"><span class="sn">7</span><span class="sl">Naves</span></div>
-      <div class="stat"><span class="sn">PC</span><span class="sl">Plataforma</span></div>
+      <div class="stat"><span class="sn">18</span><span class="sl" data-i18n="stat_fases">Fases</span></div>
+      <div class="stat"><span class="sn">18</span><span class="sl" data-i18n="stat_bosses">Bosses</span></div>
+      <div class="stat"><span class="sn">7</span><span class="sl" data-i18n="stat_naves">Naves</span></div>
+      <div class="stat"><span class="sn">PC</span><span class="sl" data-i18n="stat_plataforma">Plataforma</span></div>
     </div>
     <div class="btns">
-      <a href="#apoie" class="btn btn-p">Apoie o Projeto</a>
-      <a href="#screenshots" class="btn btn-o">Ver Screenshots</a>
+      <a href="#apoie" class="btn btn-p" data-i18n="btn_apoie">Apoie o Projeto</a>
+      <a href="#screenshots" class="btn btn-o" data-i18n="btn_screenshots">Ver Screenshots</a>
     </div>
   </div>
 </section>
 
 <section id="features">
   <div class="container">
-    <h2 class="rv">Recursos do Jogo</h2>
+    <h2 class="rv" data-i18n="sec_recursos">Recursos do Jogo</h2>
     <div class="divider"></div>
     <div class="feat-grid">
-      <div class="fc rv"><div class="fi">🚀</div><div class="ft">7 Naves Únicas</div><div class="fd">Cada nave com aparência, velocidade e sistema de propulsão distintos com arte original</div></div>
-      <div class="fc rv"><div class="fi">💥</div><div class="ft">18 Bosses Épicos</div><div class="fd">Chefes massivos com padrões de ataque únicos, arte original e projéteis exclusivos</div></div>
-      <div class="fc rv"><div class="fi">🌌</div><div class="ft">18 Fases</div><div class="fd">Ambientes espaciais distintos: nebulosas, zonas de guerra e setores dimensionais</div></div>
-      <div class="fc rv"><div class="fi">🎬</div><div class="ft">Cutscenes</div><div class="fd">História narrada em painéis animados de abertura, fases e encerramento épico</div></div>
-      <div class="fc rv"><div class="fi">💣</div><div class="ft">Bombas Especiais</div><div class="fd">Arma de área com poder devastador para momentos críticos de combate</div></div>
-      <div class="fc rv"><div class="fi">🏆</div><div class="ft">Ranking</div><div class="fd">Dispute a maior pontuação e registre seu nome na glória intergaláctica</div></div>
-      <div class="fc rv"><div class="fi">🎵</div><div class="ft">Trilha Original</div><div class="fd">Música e efeitos sonoros exclusivos para cada fase e momento de combate</div></div>
-      <div class="fc rv"><div class="fi">🔥</div><div class="ft">Rastros de Motor</div><div class="fd">Efeito de partículas nas turbinas de cada nave com cores e estilos únicos</div></div>
+      <div class="fc rv"><div class="fi">🚀</div><div class="ft" data-i18n="ft_ships">7 Naves Únicas</div><div class="fd" data-i18n="fd_ships">Cada nave com aparência, velocidade e sistema de propulsão distintos com arte original</div></div>
+      <div class="fc rv"><div class="fi">💥</div><div class="ft" data-i18n="ft_bosses">18 Bosses Épicos</div><div class="fd" data-i18n="fd_bosses">Chefes massivos com padrões de ataque únicos, arte original e projéteis exclusivos</div></div>
+      <div class="fc rv"><div class="fi">🌌</div><div class="ft" data-i18n="ft_fases">18 Fases</div><div class="fd" data-i18n="fd_fases">Ambientes espaciais distintos: nebulosas, zonas de guerra e setores dimensionais</div></div>
+      <div class="fc rv"><div class="fi">🎬</div><div class="ft" data-i18n="ft_cutscenes">Cutscenes</div><div class="fd" data-i18n="fd_cutscenes">História narrada em painéis animados de abertura, fases e encerramento épico</div></div>
+      <div class="fc rv"><div class="fi">💣</div><div class="ft" data-i18n="ft_bombas">Bombas Especiais</div><div class="fd" data-i18n="fd_bombas">Arma de área com poder devastador para momentos críticos de combate</div></div>
+      <div class="fc rv"><div class="fi">🏆</div><div class="ft" data-i18n="ft_ranking">Ranking</div><div class="fd" data-i18n="fd_ranking">Dispute a maior pontuação e registre seu nome na glória intergaláctica</div></div>
+      <div class="fc rv"><div class="fi">🎵</div><div class="ft" data-i18n="ft_musica">Trilha Original</div><div class="fd" data-i18n="fd_musica">Música e efeitos sonoros exclusivos para cada fase e momento de combate</div></div>
+      <div class="fc rv"><div class="fi">🔥</div><div class="ft" data-i18n="ft_rastros">Rastros de Motor</div><div class="fd" data-i18n="fd_rastros">Efeito de partículas nas turbinas de cada nave com cores e estilos únicos</div></div>
     </div>
   </div>
 </section>
 
 <section id="naves">
   <div class="container">
-    <h2 class="rv">As 7 Naves</h2>
+    <h2 class="rv" data-i18n="sec_naves">As 7 Naves</h2>
     <div class="divider"></div>
-    <p class="sub rv">Cada nave com características únicas de velocidade, firepower e defesa — role para ver todas</p>
+    <p class="sub rv" data-i18n="sub_naves">Cada nave com características únicas de velocidade, firepower e defesa — role para ver todas</p>
     <div class="ships">
-      <div class="sc"><div class="sw"><img src="assets/ships/p1stealthfrigatepurp.png" alt="Stealth Frigate" loading="lazy" /></div><div class="sn2">Stealth Frigate</div><div class="sd">Furtiva e resistente. Difícil de detectar. Disparos duplos de plasma roxo.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p2interceptorclassgr.png" alt="Interceptor GR" loading="lazy" /></div><div class="sn2">Interceptor GR</div><div class="sd">Velocidade alta. Ideal para hit-and-run. Três canhões de energia verde.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p3stealthfrigate.png" alt="Dark Frigate" loading="lazy" /></div><div class="sn2">Dark Frigate</div><div class="sd">Alta furtividade. Opera nas sombras. Disparo duplo de alta precisão.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p4fantasysteal.png" alt="Phantom" loading="lazy" /></div><div class="sn2">Phantom</div><div class="sd">Design exótico. Firepower elevado. Quatro turbinas multicoloridas.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p5greenfatasysteal.png" alt="Green Phantom" loading="lazy" /></div><div class="sn2">Green Phantom</div><div class="sd">Versão verde. Mais escudo, menos velocidade. Triplo disparo cósmico.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p6stealthfighter.png" alt="Stealth Fighter" loading="lazy" /></div><div class="sn2">Stealth Fighter</div><div class="sd">Compacto e rápido. Alta evasão. Canhões azul-brancos de alta cadência.</div></div>
-      <div class="sc"><div class="sw"><img src="assets/ships/p7strikefighter.png" alt="Strike Fighter" loading="lazy" /></div><div class="sn2">Strike Fighter</div><div class="sd">Especialista em ataque. Máximo dano. Propulsão laranja-negra devastadora.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p1stealthfrigatepurp.png" alt="Stealth Frigate" loading="lazy" /></div><div class="sn2">Stealth Frigate</div><div class="sd" data-i18n="sd_p1">Furtiva e resistente. Difícil de detectar. Disparos duplos de plasma roxo.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p2interceptorclassgr.png" alt="Interceptor GR" loading="lazy" /></div><div class="sn2">Interceptor GR</div><div class="sd" data-i18n="sd_p2">Velocidade alta. Ideal para hit-and-run. Três canhões de energia verde.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p3stealthfrigate.png" alt="Dark Frigate" loading="lazy" /></div><div class="sn2">Dark Frigate</div><div class="sd" data-i18n="sd_p3">Alta furtividade. Opera nas sombras. Disparo duplo de alta precisão.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p4fantasysteal.png" alt="Phantom" loading="lazy" /></div><div class="sn2">Phantom</div><div class="sd" data-i18n="sd_p4">Design exótico. Firepower elevado. Quatro turbinas multicoloridas.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p5greenfatasysteal.png" alt="Green Phantom" loading="lazy" /></div><div class="sn2">Green Phantom</div><div class="sd" data-i18n="sd_p5">Versão verde. Mais escudo, menos velocidade. Triplo disparo cósmico.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p6stealthfighter.png" alt="Stealth Fighter" loading="lazy" /></div><div class="sn2">Stealth Fighter</div><div class="sd" data-i18n="sd_p6">Compacto e rápido. Alta evasão. Canhões azul-brancos de alta cadência.</div></div>
+      <div class="sc"><div class="sw"><img src="assets/ships/p7strikefighter.png" alt="Strike Fighter" loading="lazy" /></div><div class="sn2">Strike Fighter</div><div class="sd" data-i18n="sd_p7">Especialista em ataque. Máximo dano. Propulsão laranja-negra devastadora.</div></div>
     </div>
   </div>
 </section>
 
 <section id="bosses">
   <div class="container">
-    <h2 class="rv">18 Bosses</h2>
+    <h2 class="rv" data-i18n="sec_bosses">18 Bosses</h2>
     <div class="divider"></div>
-    <p class="sub rv">Cada chefe com arte original, padrão de ataque único e projéteis exclusivos</p>
+    <p class="sub rv" data-i18n="sub_bosses">Cada chefe com arte original, padrão de ataque único e projéteis exclusivos</p>
     <div class="bg-grid">
       <div class="bc rv"><img class="bi" src="assets/bosses/bossplasmaleviathan.png" alt="Plasma Leviathan" loading="lazy" /><div class="bl">Plasma Leviathan</div></div>
       <div class="bc rv"><img class="bi" src="assets/bosses/bossstar-consumer.png" alt="Star Consumer" loading="lazy" /><div class="bl">Star Consumer</div></div>
@@ -549,9 +559,9 @@
 
 <section id="screenshots">
   <div class="container">
-    <h2 class="rv">Screenshots</h2>
+    <h2 class="rv" data-i18n="sec_screenshots">Screenshots</h2>
     <div class="divider"></div>
-    <p class="sub rv">18 ambientes espaciais únicos — de nebulosas a setores dimensionais</p>
+    <p class="sub rv" data-i18n="sub_screenshots">18 ambientes espaciais únicos — de nebulosas a setores dimensionais</p>
     <div class="sg">
       <img class="si rv" src="assets/bg/phase1_combat_bg.png"  alt="Fase 1"  loading="lazy" />
       <img class="si rv" src="assets/bg/phase2_combat_bg.png"  alt="Fase 2"  loading="lazy" />
@@ -577,9 +587,9 @@
 
 <section id="historia">
   <div class="container">
-    <h2 class="rv">A História</h2>
+    <h2 class="rv" data-i18n="sec_historia">A História</h2>
     <div class="divider"></div>
-    <p class="sub rv">Quando a Brecha Dimensional se abre, a invasão Vorrkai começa — narrada em cutscenes animadas</p>
+    <p class="sub rv" data-i18n="sub_historia">Quando a Brecha Dimensional se abre, a invasão Vorrkai começa — narrada em cutscenes animadas</p>
     <div class="pg">
       <img class="pi rv" src="assets/cutscene/panel_1.png" alt="Cena 1" loading="lazy" />
       <img class="pi rv" src="assets/cutscene/panel_2.png" alt="Cena 2" loading="lazy" />
@@ -592,32 +602,32 @@
 
 <section id="vorrkai">
   <div class="container">
-    <h2 class="rv" style="color:#ff3333">Os Vorrkai</h2>
+    <h2 class="rv" style="color:#ff3333" data-i18n="sec_vorrkai">Os Vorrkai</h2>
     <div class="divider" style="background:linear-gradient(90deg,#ff3333,#9c27b0)"></div>
-    <p class="sub rv">400 anos de conquista. Galáxias inteiras consumidas. Agora é nossa vez de resistir.</p>
+    <p class="sub rv" data-i18n="sub_vorrkai">400 anos de conquista. Galáxias inteiras consumidas. Agora é nossa vez de resistir.</p>
     <div class="vorrkai-inner">
       <div class="vorrkai-text rv">
-        <h3>A Ameaça que Veio do Além</h3>
-        <p>
+        <h3 data-i18n="vorrkai_h3">A Ameaça que Veio do Além</h3>
+        <p data-i18n-html="vorrkai_p1">
           Há quatro séculos, os Vorrkai surgiram das profundezas de uma dimensão sem nome —
           uma civilização que não constrói, não negocia, não coexiste.
           Eles <strong>consomem</strong>. Mundos inteiros reduzidos a matéria-prima.
           Povos absorvidos, suas memórias e culturas apagadas como dados corrompidos.
         </p>
-        <p>
+        <p data-i18n="vorrkai_p2">
           Em 400 anos de expansão ininterrupta, os Vorrkai varreram 14 sistemas estelares,
           subjugaram 37 civilizações e eliminaram tudo que não podiam controlar.
           Sua frota é imparável. Suas máquinas de guerra, incompreensíveis em tamanho e violência.
           E agora — pela primeira vez em sua história — encontraram resistência.
         </p>
-        <p>
+        <p data-i18n="vorrkai_p3">
           A Brecha Dimensional aberta sobre o SETOR Z não é apenas uma invasão.
           É o início do fim — a menos que sete raças que nunca se aliaram antes decidam lutar juntas.
         </p>
         <div class="vorrkai-stats">
-          <div class="vs"><span class="vsn">400</span><span class="vsl">Anos de conquista</span></div>
-          <div class="vs"><span class="vsn">14</span><span class="vsl">Sistemas destruídos</span></div>
-          <div class="vs"><span class="vsn">37</span><span class="vsl">Civilizações subjugadas</span></div>
+          <div class="vs"><span class="vsn">400</span><span class="vsl" data-i18n="vsl_anos">Anos de conquista</span></div>
+          <div class="vs"><span class="vsn">14</span><span class="vsl" data-i18n="vsl_sistemas">Sistemas destruídos</span></div>
+          <div class="vs"><span class="vsn">37</span><span class="vsl" data-i18n="vsl_civs">Civilizações subjugadas</span></div>
         </div>
       </div>
       <div class="vorrkai-imgs rv">
@@ -630,71 +640,71 @@
 
 <section id="racas">
   <div class="container">
-    <h2 class="rv">As 7 Raças Aliadas</h2>
+    <h2 class="rv" data-i18n="sec_racas">As 7 Raças Aliadas</h2>
     <div class="divider"></div>
-    <p class="sub rv">Quando a Brecha Dimensional se abriu, sete civilizações inimigas deixaram suas guerras de lado e uniram forças contra a invasão Vorrkai</p>
+    <p class="sub rv" data-i18n="sub_racas">Quando a Brecha Dimensional se abriu, sete civilizações inimigas deixaram suas guerras de lado e uniram forças contra a invasão Vorrkai</p>
     <div class="races-grid">
 
       <div class="race-card rv" style="--ac:#b450ff">
         <div class="race-img-w"><img src="assets/ships/p1stealthfrigatepurp.png" alt="NYX'ARI" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">Os Tecelões de Mente · Stealth Frigate</div>
+          <div class="race-tag" data-i18n="rt_nyxari">Os Tecelões de Mente · Stealth Frigate</div>
           <div class="race-name">NYX'ARI</div>
-          <div class="race-desc">Guardiões filosóficos das dimensões conhecidas. Carregam o peso de cada ausência — cada piloto perdido vive em seus pensamentos para sempre. Foram os primeiros a aceitar que fechar a Brecha Dimensional valia qualquer custo.</div>
+          <div class="race-desc" data-i18n="rd_nyxari">Guardiões filosóficos das dimensões conhecidas. Carregam o peso de cada ausência — cada piloto perdido vive em seus pensamentos para sempre. Foram os primeiros a aceitar que fechar a Brecha Dimensional valia qualquer custo.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#3cd23c">
         <div class="race-img-w"><img src="assets/ships/p2interceptorclassgr.png" alt="GAL'ROK" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">Os Lâminas de Ferro · Interceptor GR</div>
+          <div class="race-tag" data-i18n="rt_galrok">Os Lâminas de Ferro · Interceptor GR</div>
           <div class="race-name">GAL'ROK</div>
-          <div class="race-desc">Mercenários frios que nunca se importaram com o custo de uma guerra — até esta. Lutaram ao lado de quem odiavam por séculos e descobriram algo que nenhum cálculo havia previsto: que juntos, funcionava. Que valia a pena.</div>
+          <div class="race-desc" data-i18n="rd_galrok">Mercenários frios que nunca se importaram com o custo de uma guerra — até esta. Lutaram ao lado de quem odiavam por séculos e descobriram algo que nenhum cálculo havia previsto: que juntos, funcionava. Que valia a pena.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#a046dc">
         <div class="race-img-w"><img src="assets/ships/p3stealthfrigate.png" alt="ZEL'KAAR" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">Os Andantes Entre Mundos · Dark Frigate</div>
+          <div class="race-tag" data-i18n="rt_zelkaar">Os Andantes Entre Mundos · Dark Frigate</div>
           <div class="race-name">ZEL'KAAR</div>
-          <div class="race-desc">Viajantes ancestrais das passagens dimensionais. Os caminhos que percorreram ficaram marcados com sangue — e sabem que isso não se apaga. Mas quando o espaço entre os mundos respirou livre novamente, souberam que foi suficiente.</div>
+          <div class="race-desc" data-i18n="rd_zelkaar">Viajantes ancestrais das passagens dimensionais. Os caminhos que percorreram ficaram marcados com sangue — e sabem que isso não se apaga. Mas quando o espaço entre os mundos respirou livre novamente, souberam que foi suficiente.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#ff8c1e">
         <div class="race-img-w"><img src="assets/ships/p4fantasysteal.png" alt="KAR'VEL" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">Os Nômades de Sangue · Phantom</div>
+          <div class="race-tag" data-i18n="rt_karvel">Os Nômades de Sangue · Phantom</div>
           <div class="race-name">KAR'VEL</div>
-          <div class="race-desc">Guardiões da honra dos caídos. Lembram cada nome, cada face de todos os que não voltaram. Duzentos e quarenta e sete KAR'VEL partiram sem retorno nesta guerra — e a dívida foi paga por todos os que não viveram para ver o fim.</div>
+          <div class="race-desc" data-i18n="rd_karvel">Guardiões da honra dos caídos. Lembram cada nome, cada face de todos os que não voltaram. Duzentos e quarenta e sete KAR'VEL partiram sem retorno nesta guerra — e a dívida foi paga por todos os que não viveram para ver o fim.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#32dcb4">
         <div class="race-img-w"><img src="assets/ships/p5greenfatasysteal.png" alt="LUM'FERA" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">A Carne e a Máquina · Green Phantom</div>
+          <div class="race-tag" data-i18n="rt_lumfera">A Carne e a Máquina · Green Phantom</div>
           <div class="race-name">LUM'FERA</div>
-          <div class="race-desc">Consciência coletiva que preserva cada voz em sua memória compartilhada. Quarenta e dois mil vozes foram adicionadas ao seu registro eterno nesta guerra. Lutaram para que as raças escravizadas pelos Vorrkai pudessem ser livres.</div>
+          <div class="race-desc" data-i18n="rd_lumfera">Consciência coletiva que preserva cada voz em sua memória compartilhada. Quarenta e dois mil vozes foram adicionadas ao seu registro eterno nesta guerra. Lutaram para que as raças escravizadas pelos Vorrkai pudessem ser livres.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#ff4141">
         <div class="race-img-w"><img src="assets/ships/p6stealthfighter.png" alt="SCORCH'KAI" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">Os Filhos da Chama Dupla · Stealth Fighter</div>
+          <div class="race-tag" data-i18n="rt_scorchkai">Os Filhos da Chama Dupla · Stealth Fighter</div>
           <div class="race-name">SCORCH'KAI</div>
-          <div class="race-desc">Guerreiros que passaram a vida esperando por uma guerra à altura. Quando ela chegou, lutaram como nunca — e sentiram algo que nenhuma batalha anterior havia dado: a sensação de que cada segundo valeu. A melhor e mais significativa guerra de suas vidas.</div>
+          <div class="race-desc" data-i18n="rd_scorchkai">Guerreiros que passaram a vida esperando por uma guerra à altura. Quando ela chegou, lutaram como nunca — e sentiram algo que nenhuma batalha anterior havia dado: a sensação de que cada segundo valeu. A melhor e mais significativa guerra de suas vidas.</div>
         </div>
       </div>
 
       <div class="race-card rv" style="--ac:#d2d2f0">
         <div class="race-img-w"><img src="assets/ships/p7strikefighter.png" alt="VAL'THÖ" loading="lazy" /></div>
         <div class="race-info">
-          <div class="race-tag">A Ordem Calculada · Strike Fighter</div>
+          <div class="race-tag" data-i18n="rt_valtho">A Ordem Calculada · Strike Fighter</div>
           <div class="race-name">VAL'THÖ</div>
-          <div class="race-desc">Analistas que modelam probabilidades de tudo. Cada baixa superou seus modelos — o que foi dado não pode ser calculado. Ao final, pela primeira vez em sua existência, preferiram não conhecer a probabilidade do futuro. Preferiram simplesmente esperá-lo.</div>
+          <div class="race-desc" data-i18n="rd_valtho">Analistas que modelam probabilidades de tudo. Cada baixa superou seus modelos — o que foi dado não pode ser calculado. Ao final, pela primeira vez em sua existência, preferiram não conhecer a probabilidade do futuro. Preferiram simplesmente esperá-lo.</div>
         </div>
       </div>
 
@@ -704,32 +714,32 @@
 
 <section id="bazar">
   <div class="container">
-    <h2 class="rv">Hub Bazar — Loja de Melhorias</h2>
+    <h2 class="rv" data-i18n="sec_bazar">Hub Bazar — Loja de Melhorias</h2>
     <div class="divider"></div>
-    <p class="sub rv">Entre as fases, visite o Bazar de Sucatas — troque pontos acumulados por upgrades que mudam o rumo da batalha</p>
+    <p class="sub rv" data-i18n="sub_bazar">Entre as fases, visite o Bazar de Sucatas — troque pontos acumulados por upgrades que mudam o rumo da batalha</p>
     <div class="bazar-wrap">
       <div class="bazar-img rv">
         <img src="assets/bazar/hub_bazar.png" alt="Hub Bazar — Reparos e Trocas" loading="lazy" />
       </div>
       <div class="bazar-items">
         <div class="bz-item rv">
-          <div><div class="bz-name">Vida Extra</div><div class="bz-desc">+1 vida extra para a próxima fase</div></div>
+          <div><div class="bz-name" data-i18n="bz_vida">Vida Extra</div><div class="bz-desc" data-i18n="bz_vida_desc">+1 vida extra para a próxima fase</div></div>
           <div class="bz-pts">3.000 pts</div>
         </div>
         <div class="bz-item rv">
-          <div><div class="bz-name">Propulsores Lv2</div><div class="bz-desc">Velocidade e manobrabilidade aumentadas</div></div>
+          <div><div class="bz-name" data-i18n="bz_prop">Propulsores Lv2</div><div class="bz-desc" data-i18n="bz_prop_desc">Velocidade e manobrabilidade aumentadas</div></div>
           <div class="bz-pts">2.000 pts</div>
         </div>
         <div class="bz-item rv">
-          <div><div class="bz-name">Armamento Lv2</div><div class="bz-desc">Firepower máximo com projéteis aprimorados</div></div>
+          <div><div class="bz-name" data-i18n="bz_arma">Armamento Lv2</div><div class="bz-desc" data-i18n="bz_arma_desc">Firepower máximo com projéteis aprimorados</div></div>
           <div class="bz-pts">5.000 pts</div>
         </div>
         <div class="bz-item rv">
-          <div><div class="bz-name">Depósito de Bombas</div><div class="bz-desc">+2 bombas especiais carregadas para a fase seguinte</div></div>
+          <div><div class="bz-name" data-i18n="bz_bomb">Depósito de Bombas</div><div class="bz-desc" data-i18n="bz_bomb_desc">+2 bombas especiais carregadas para a fase seguinte</div></div>
           <div class="bz-pts">3.500 pts</div>
         </div>
         <div class="bz-item rv">
-          <div><div class="bz-name">Escudo Reforçado</div><div class="bz-desc">Resistência a impacto aumentada por uma fase</div></div>
+          <div><div class="bz-name" data-i18n="bz_escudo">Escudo Reforçado</div><div class="bz-desc" data-i18n="bz_escudo_desc">Resistência a impacto aumentada por uma fase</div></div>
           <div class="bz-pts">4.000 pts</div>
         </div>
       </div>
@@ -739,29 +749,31 @@
 
 <section id="dev">
   <div class="container">
-    <h2 class="rv">Status de Desenvolvimento</h2>
+    <h2 class="rv" data-i18n="sec_dev">Status de Desenvolvimento</h2>
     <div class="divider"></div>
     <div class="tl">
-      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Core do Jogo Completo</div><div class="td2">18 fases, 18 bosses, 7 naves, sistema de tiros, bombas, vidas e colisão</div></div></div>
-      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Arte e Sprites Originais</div><div class="td2">Todas as naves, bosses, inimigos e cenários com arte criada exclusivamente para o jogo</div></div></div>
-      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Cutscenes e Narrativa</div><div class="td2">Cutscenes de abertura, encerramento pós-créditos e narrativa entre fases</div></div></div>
-      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt">Áudio e Música Original</div><div class="td2">Trilha sonora e efeitos sonoros exclusivos para todas as ações de combate</div></div></div>
-      <div class="ti rv"><div class="td wip">◐</div><div class="tc"><div class="tt">Polimento Final</div><div class="td2">Efeitos visuais avançados, mecânicas extras, modo dificuldade e ranking expandido</div></div></div>
-      <div class="ti rv"><div class="td soon">○</div><div class="tc"><div class="tt">Lançamento na Steam</div><div class="td2">Previsão para os próximos 6 meses — com o apoio da comunidade</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt" data-i18n="dev1_t">Core do Jogo Completo</div><div class="td2" data-i18n="dev1_d">18 fases, 18 bosses, 7 naves, sistema de tiros, bombas, vidas e colisão</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt" data-i18n="dev2_t">Arte e Sprites Originais</div><div class="td2" data-i18n="dev2_d">Todas as naves, bosses, inimigos e cenários com arte criada exclusivamente para o jogo</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt" data-i18n="dev3_t">Cutscenes e Narrativa</div><div class="td2" data-i18n="dev3_d">Cutscenes de abertura, encerramento pós-créditos e narrativa entre fases</div></div></div>
+      <div class="ti rv"><div class="td done">✓</div><div class="tc"><div class="tt" data-i18n="dev4_t">Áudio e Música Original</div><div class="td2" data-i18n="dev4_d">Trilha sonora e efeitos sonoros exclusivos para todas as ações de combate</div></div></div>
+      <div class="ti rv"><div class="td wip">◐</div><div class="tc"><div class="tt" data-i18n="dev5_t">Polimento Final</div><div class="td2" data-i18n="dev5_d">Efeitos visuais avançados, mecânicas extras, modo dificuldade e ranking expandido</div></div></div>
+      <div class="ti rv"><div class="td soon">○</div><div class="tc"><div class="tt" data-i18n="dev6_t">Lançamento na Steam</div><div class="td2" data-i18n="dev6_d">Previsão para os próximos 6 meses — com o apoio da comunidade</div></div></div>
     </div>
   </div>
 </section>
 
 <section id="trailer">
   <div class="container">
-    <h2 class="rv">Gameplay em Ação</h2>
+    <h2 class="rv" data-i18n="sec_trailer">Gameplay em Ação</h2>
     <div class="divider"></div>
-    <p class="sub rv">Trailer oficial em produção — preview do combate em tempo real</p>
+    <p class="sub rv" data-i18n="trailer_sub">Assista ao trailer oficial e veja o combate em tempo real</p>
     <div class="trailer-box rv">
-      <img src="assets/gameplay_hud.png" alt="SETOR Z — combate em tempo real com HUD" loading="lazy" />
-      <div class="trailer-ov">
-        <div class="play-btn">▶</div>
-        <div class="trailer-label">Trailer completo em breve · YouTube</div>
+      <div class="trailer-ratio">
+        <iframe
+          src="https://www.youtube.com/embed/v9JN76erIZc?rel=0&modestbranding=1&color=white"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          title="SETOR Z — Trailer Oficial"></iframe>
       </div>
     </div>
   </div>
@@ -770,28 +782,28 @@
 <section id="apoie">
   <div class="container">
     <div class="ab rv">
-      <div class="at">Apoie o Projeto</div>
-      <p class="ad">
+      <div class="at" data-i18n="apoie_title">Apoie o Projeto</div>
+      <p class="ad" data-i18n="apoie_desc">
         SETOR Z está quase pronto. Com o seu apoio podemos finalizar os últimos polimentos,
         publicar na Steam e continuar desenvolvendo conteúdo extra como novos modos de jogo,
         naves adicionais e expansões de história. Cada apoiador garante o futuro da galáxia.
       </p>
       <div class="tiers">
-        <div class="tier"><span class="tp">R$15</span><span class="tl2">Recruta</span><div class="tk">Cópia digital do jogo na Steam</div></div>
-        <div class="tier"><span class="tp">R$35</span><span class="tl2">Piloto</span><div class="tk">Jogo + nome nos créditos</div></div>
-        <div class="tier"><span class="tp">R$80</span><span class="tl2">Comandante</span><div class="tk">Jogo + créditos + acesso beta antecipado</div></div>
+        <div class="tier"><span class="tp">R$15</span><span class="tl2" data-i18n="tier1_label">Recruta</span><div class="tk" data-i18n="tier1_desc">Cópia digital do jogo na Steam</div></div>
+        <div class="tier"><span class="tp">R$35</span><span class="tl2" data-i18n="tier2_label">Piloto</span><div class="tk" data-i18n="tier2_desc">Jogo + nome nos créditos</div></div>
+        <div class="tier"><span class="tp">R$80</span><span class="tl2" data-i18n="tier3_label">Comandante</span><div class="tk" data-i18n="tier3_desc">Jogo + créditos + acesso beta antecipado</div></div>
       </div>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;">
-        <a href="#" style="display:inline-block;padding:15px 32px;border-radius:4px;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#e8572a,#c0392b);color:#fff;box-shadow:0 4px 20px rgba(232,87,42,.35);transition:all .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(232,87,42,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(232,87,42,.35)'">
+        <a href="#" data-i18n="btn_catarse" style="display:inline-block;padding:15px 32px;border-radius:4px;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#e8572a,#c0392b);color:#fff;box-shadow:0 4px 20px rgba(232,87,42,.35);transition:all .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(232,87,42,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(232,87,42,.35)'">
           Apoiar no Catarse
         </a>
-        <a href="#" style="display:inline-block;padding:15px 32px;border-radius:4px;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#c0166c,#8b0070);color:#fff;box-shadow:0 4px 20px rgba(192,22,108,.35);transition:all .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(192,22,108,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(192,22,108,.35)'">
+        <a href="#" data-i18n="btn_indiegogo" style="display:inline-block;padding:15px 32px;border-radius:4px;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#c0166c,#8b0070);color:#fff;box-shadow:0 4px 20px rgba(192,22,108,.35);transition:all .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(192,22,108,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(192,22,108,.35)'">
           Apoiar no Indiegogo
         </a>
       </div>
       <p style="margin-top:4px;font-size:.73rem;color:var(--dim);">
-        Links das campanhas em breve &nbsp;·&nbsp; Dúvidas?
-        <a href="mailto:riey21@hotmail.com">Entre em contato</a>
+        <span data-i18n="apoie_links">Links das campanhas em breve &nbsp;·&nbsp; Dúvidas?</span>
+        <a href="mailto:riey21@hotmail.com" data-i18n="apoie_contact">Entre em contato</a>
       </p>
     </div>
   </div>
@@ -800,9 +812,9 @@
 <footer>
   <div class="fst"><img src="assets/cutscene/ninja_shadow_labs.png" alt="Ninja Shadow Labs" /></div>
   <div class="fl">SETOR <span>Z</span> — BRECHA DIMENSIONAL: INVASÃO VORRKAI</div>
-  <div class="fc2">© 2026 Ninja Shadow Labs · Todos os direitos reservados</div>
-  <div class="fdev">Desenvolvido por <a href="https://leandroninja.github.io" target="_blank" rel="noopener">Leandro Ninja</a></div>
-  <div class="fdev" style="margin-top:14px;">Entre em contato com o desenvolvedor:
+  <div class="fc2" data-i18n="footer_copy">© 2026 Ninja Shadow Labs · Todos os direitos reservados</div>
+  <div class="fdev"><span data-i18n="footer_dev">Desenvolvido por</span> <a href="https://leandroninja.github.io" target="_blank" rel="noopener">Leandro Ninja</a></div>
+  <div class="fdev" style="margin-top:14px;"><span data-i18n="footer_contact">Entre em contato com o desenvolvedor:</span>
     <a href="mailto:riey21@hotmail.com">riey21@hotmail.com</a>
     &nbsp;·&nbsp;
     <a href="mailto:suzukihell@gmail.com">suzukihell@gmail.com</a>
@@ -821,6 +833,230 @@
 </div>
 
 <script>
+/* ============================================================
+   INTERNATIONALIZATION  PT / EN / ES
+   ============================================================ */
+var I18N = {
+  pt: {
+    nav_recursos:"Recursos",nav_naves:"Naves",nav_vorrkai:"Vorrkai",nav_racas:"Raças",nav_bazar:"Bazar",nav_bosses:"Bosses",nav_screenshots:"Screenshots",nav_dev:"Status",nav_apoie:"Apoie",nav_btn:"Apoie o Projeto",
+    hero_badge:"Em desenvolvimento · PC · Em breve na Steam",
+    hero_desc:"Um space shooter épico onde as fronteiras entre dimensões se rompem. Pilote 7 naves únicas, enfrente 18 bosses devastadores e salve o universo da invasão Vorrkai em 18 fases de combate intenso.",
+    stat_fases:"Fases",stat_bosses:"Bosses",stat_naves:"Naves",stat_plataforma:"Plataforma",
+    btn_apoie:"Apoie o Projeto",btn_screenshots:"Ver Screenshots",
+    sec_recursos:"Recursos do Jogo",
+    ft_ships:"7 Naves Únicas",fd_ships:"Cada nave com aparência, velocidade e sistema de propulsão distintos com arte original",
+    ft_bosses:"18 Bosses Épicos",fd_bosses:"Chefes massivos com padrões de ataque únicos, arte original e projéteis exclusivos",
+    ft_fases:"18 Fases",fd_fases:"Ambientes espaciais distintos: nebulosas, zonas de guerra e setores dimensionais",
+    ft_cutscenes:"Cutscenes",fd_cutscenes:"História narrada em painéis animados de abertura, fases e encerramento épico",
+    ft_bombas:"Bombas Especiais",fd_bombas:"Arma de área com poder devastador para momentos críticos de combate",
+    ft_ranking:"Ranking",fd_ranking:"Dispute a maior pontuação e registre seu nome na glória intergaláctica",
+    ft_musica:"Trilha Original",fd_musica:"Música e efeitos sonoros exclusivos para cada fase e momento de combate",
+    ft_rastros:"Rastros de Motor",fd_rastros:"Efeito de partículas nas turbinas de cada nave com cores e estilos únicos",
+    sec_naves:"As 7 Naves",sub_naves:"Cada nave com características únicas de velocidade, firepower e defesa — role para ver todas",
+    sd_p1:"Furtiva e resistente. Difícil de detectar. Disparos duplos de plasma roxo.",
+    sd_p2:"Velocidade alta. Ideal para hit-and-run. Três canhões de energia verde.",
+    sd_p3:"Alta furtividade. Opera nas sombras. Disparo duplo de alta precisão.",
+    sd_p4:"Design exótico. Firepower elevado. Quatro turbinas multicoloridas.",
+    sd_p5:"Versão verde. Mais escudo, menos velocidade. Triplo disparo cósmico.",
+    sd_p6:"Compacto e rápido. Alta evasão. Canhões azul-brancos de alta cadência.",
+    sd_p7:"Especialista em ataque. Máximo dano. Propulsão laranja-negra devastadora.",
+    sec_bosses:"18 Bosses",sub_bosses:"Cada chefe com arte original, padrão de ataque único e projéteis exclusivos",
+    sec_screenshots:"Screenshots",sub_screenshots:"18 ambientes espaciais únicos — de nebulosas a setores dimensionais",
+    sec_historia:"A História",sub_historia:"Quando a Brecha Dimensional se abre, a invasão Vorrkai começa — narrada em cutscenes animadas",
+    sec_vorrkai:"Os Vorrkai",sub_vorrkai:"400 anos de conquista. Galáxias inteiras consumidas. Agora é nossa vez de resistir.",
+    vorrkai_h3:"A Ameaça que Veio do Além",
+    vorrkai_p1:"Há quatro séculos, os Vorrkai surgiram das profundezas de uma dimensão sem nome — uma civilização que não constrói, não negocia, não coexiste. Eles <strong>consomem</strong>. Mundos inteiros reduzidos a matéria-prima. Povos absorvidos, suas memórias e culturas apagadas como dados corrompidos.",
+    vorrkai_p2:"Em 400 anos de expansão ininterrupta, os Vorrkai varreram 14 sistemas estelares, subjugaram 37 civilizações e eliminaram tudo que não podiam controlar. Sua frota é imparável. Suas máquinas de guerra, incompreensíveis em tamanho e violência. E agora — pela primeira vez em sua história — encontraram resistência.",
+    vorrkai_p3:"A Brecha Dimensional aberta sobre o SETOR Z não é apenas uma invasão. É o início do fim — a menos que sete raças que nunca se aliaram antes decidam lutar juntas.",
+    vsl_anos:"Anos de conquista",vsl_sistemas:"Sistemas destruídos",vsl_civs:"Civilizações subjugadas",
+    sec_racas:"As 7 Raças Aliadas",sub_racas:"Quando a Brecha Dimensional se abriu, sete civilizações inimigas deixaram suas guerras de lado e uniram forças contra a invasão Vorrkai",
+    rt_nyxari:"Os Tecelões de Mente · Stealth Frigate",rd_nyxari:"Guardiões filosóficos das dimensões conhecidas. Carregam o peso de cada ausência — cada piloto perdido vive em seus pensamentos para sempre. Foram os primeiros a aceitar que fechar a Brecha Dimensional valia qualquer custo.",
+    rt_galrok:"Os Lâminas de Ferro · Interceptor GR",rd_galrok:"Mercenários frios que nunca se importaram com o custo de uma guerra — até esta. Lutaram ao lado de quem odiavam por séculos e descobriram algo que nenhum cálculo havia previsto: que juntos, funcionava. Que valia a pena.",
+    rt_zelkaar:"Os Andantes Entre Mundos · Dark Frigate",rd_zelkaar:"Viajantes ancestrais das passagens dimensionais. Os caminhos que percorreram ficaram marcados com sangue — e sabem que isso não se apaga. Mas quando o espaço entre os mundos respirou livre novamente, souberam que foi suficiente.",
+    rt_karvel:"Os Nômades de Sangue · Phantom",rd_karvel:"Guardiões da honra dos caídos. Lembram cada nome, cada face de todos os que não voltaram. Duzentos e quarenta e sete KAR'VEL partiram sem retorno nesta guerra — e a dívida foi paga por todos os que não viveram para ver o fim.",
+    rt_lumfera:"A Carne e a Máquina · Green Phantom",rd_lumfera:"Consciência coletiva que preserva cada voz em sua memória compartilhada. Quarenta e dois mil vozes foram adicionadas ao seu registro eterno nesta guerra. Lutaram para que as raças escravizadas pelos Vorrkai pudessem ser livres.",
+    rt_scorchkai:"Os Filhos da Chama Dupla · Stealth Fighter",rd_scorchkai:"Guerreiros que passaram a vida esperando por uma guerra à altura. Quando ela chegou, lutaram como nunca — e sentiram algo que nenhuma batalha anterior havia dado: a sensação de que cada segundo valeu. A melhor e mais significativa guerra de suas vidas.",
+    rt_valtho:"A Ordem Calculada · Strike Fighter",rd_valtho:"Analistas que modelam probabilidades de tudo. Cada baixa superou seus modelos — o que foi dado não pode ser calculado. Ao final, pela primeira vez em sua existência, preferiram não conhecer a probabilidade do futuro. Preferiram simplesmente esperá-lo.",
+    sec_bazar:"Hub Bazar — Loja de Melhorias",sub_bazar:"Entre as fases, visite o Bazar de Sucatas — troque pontos acumulados por upgrades que mudam o rumo da batalha",
+    bz_vida:"Vida Extra",bz_vida_desc:"+1 vida extra para a próxima fase",
+    bz_prop:"Propulsores Lv2",bz_prop_desc:"Velocidade e manobrabilidade aumentadas",
+    bz_arma:"Armamento Lv2",bz_arma_desc:"Firepower máximo com projéteis aprimorados",
+    bz_bomb:"Depósito de Bombas",bz_bomb_desc:"+2 bombas especiais carregadas para a fase seguinte",
+    bz_escudo:"Escudo Reforçado",bz_escudo_desc:"Resistência a impacto aumentada por uma fase",
+    sec_dev:"Status de Desenvolvimento",
+    dev1_t:"Core do Jogo Completo",dev1_d:"18 fases, 18 bosses, 7 naves, sistema de tiros, bombas, vidas e colisão",
+    dev2_t:"Arte e Sprites Originais",dev2_d:"Todas as naves, bosses, inimigos e cenários com arte criada exclusivamente para o jogo",
+    dev3_t:"Cutscenes e Narrativa",dev3_d:"Cutscenes de abertura, encerramento pós-créditos e narrativa entre fases",
+    dev4_t:"Áudio e Música Original",dev4_d:"Trilha sonora e efeitos sonoros exclusivos para todas as ações de combate",
+    dev5_t:"Polimento Final",dev5_d:"Efeitos visuais avançados, mecânicas extras, modo dificuldade e ranking expandido",
+    dev6_t:"Lançamento na Steam",dev6_d:"Previsão para os próximos 6 meses — com o apoio da comunidade",
+    sec_trailer:"Gameplay em Ação",trailer_sub:"Assista ao trailer oficial e veja o combate em tempo real",
+    apoie_title:"Apoie o Projeto",
+    apoie_desc:"SETOR Z está quase pronto. Com o seu apoio podemos finalizar os últimos polimentos, publicar na Steam e continuar desenvolvendo conteúdo extra como novos modos de jogo, naves adicionais e expansões de história. Cada apoiador garante o futuro da galáxia.",
+    tier1_label:"Recruta",tier1_desc:"Cópia digital do jogo na Steam",
+    tier2_label:"Piloto",tier2_desc:"Jogo + nome nos créditos",
+    tier3_label:"Comandante",tier3_desc:"Jogo + créditos + acesso beta antecipado",
+    btn_catarse:"Apoiar no Catarse",btn_indiegogo:"Apoiar no Indiegogo",
+    apoie_links:"Links das campanhas em breve · Dúvidas?",apoie_contact:"Entre em contato",
+    footer_copy:"© 2026 Ninja Shadow Labs · Todos os direitos reservados",
+    footer_dev:"Desenvolvido por",footer_contact:"Entre em contato com o desenvolvedor:"
+  },
+  en: {
+    nav_recursos:"Features",nav_naves:"Ships",nav_vorrkai:"Vorrkai",nav_racas:"Races",nav_bazar:"Bazar",nav_bosses:"Bosses",nav_screenshots:"Screenshots",nav_dev:"Status",nav_apoie:"Support",nav_btn:"Support the Project",
+    hero_badge:"In development · PC · Coming soon on Steam",
+    hero_desc:"An epic space shooter where the boundaries between dimensions shatter. Pilot 7 unique ships, face 18 devastating bosses and save the universe from the Vorrkai invasion across 18 intense combat phases.",
+    stat_fases:"Phases",stat_bosses:"Bosses",stat_naves:"Ships",stat_plataforma:"Platform",
+    btn_apoie:"Support the Project",btn_screenshots:"View Screenshots",
+    sec_recursos:"Game Features",
+    ft_ships:"7 Unique Ships",fd_ships:"Each ship with distinct appearance, speed and propulsion system with original artwork",
+    ft_bosses:"18 Epic Bosses",fd_bosses:"Massive bosses with unique attack patterns, original artwork and exclusive projectiles",
+    ft_fases:"18 Phases",fd_fases:"Distinct space environments: nebulae, war zones and dimensional sectors",
+    ft_cutscenes:"Cutscenes",fd_cutscenes:"Story told in animated panels covering opening, phases and epic ending",
+    ft_bombas:"Special Bombs",fd_bombas:"Area weapon with devastating power for critical combat moments",
+    ft_ranking:"Ranking",fd_ranking:"Compete for the highest score and etch your name in intergalactic glory",
+    ft_musica:"Original Soundtrack",fd_musica:"Exclusive music and sound effects for every phase and combat moment",
+    ft_rastros:"Engine Trails",fd_rastros:"Particle effect on each ship's thrusters with unique colors and styles",
+    sec_naves:"The 7 Ships",sub_naves:"Each ship with unique speed, firepower and defense — scroll to see all",
+    sd_p1:"Stealthy and resilient. Hard to detect. Dual purple plasma shots.",
+    sd_p2:"High speed. Ideal for hit-and-run. Three green energy cannons.",
+    sd_p3:"High stealth. Operates in the shadows. Dual high-precision shots.",
+    sd_p4:"Exotic design. Elevated firepower. Four multicolored thrusters.",
+    sd_p5:"Green version. More shields, less speed. Triple cosmic blast.",
+    sd_p6:"Compact and fast. High evasion. Blue-white high-rate cannons.",
+    sd_p7:"Attack specialist. Maximum damage. Devastating orange-black propulsion.",
+    sec_bosses:"18 Bosses",sub_bosses:"Each boss with original art, unique attack pattern and exclusive projectiles",
+    sec_screenshots:"Screenshots",sub_screenshots:"18 unique space environments — from nebulae to dimensional sectors",
+    sec_historia:"The Story",sub_historia:"When the Dimensional Rift opens, the Vorrkai invasion begins — told in animated cutscenes",
+    sec_vorrkai:"The Vorrkai",sub_vorrkai:"400 years of conquest. Entire galaxies consumed. Now it's our turn to resist.",
+    vorrkai_h3:"The Threat That Came from Beyond",
+    vorrkai_p1:"Four centuries ago, the Vorrkai emerged from the depths of a nameless dimension — a civilization that does not build, does not negotiate, does not coexist. They <strong>consume</strong>. Entire worlds reduced to raw material. Peoples absorbed, their memories and cultures erased like corrupted data.",
+    vorrkai_p2:"In 400 years of uninterrupted expansion, the Vorrkai swept through 14 stellar systems, subjugated 37 civilizations and eliminated everything they could not control. Their fleet is unstoppable. Their war machines, incomprehensible in size and violence. And now — for the first time in their history — they have met resistance.",
+    vorrkai_p3:"The Dimensional Rift opened over SECTOR Z is not just an invasion. It is the beginning of the end — unless seven races that have never allied before decide to fight together.",
+    vsl_anos:"Years of conquest",vsl_sistemas:"Systems destroyed",vsl_civs:"Civilizations subjugated",
+    sec_racas:"The 7 Allied Races",sub_racas:"When the Dimensional Rift opened, seven enemy civilizations set aside their wars and united against the Vorrkai invasion",
+    rt_nyxari:"The Mind Weavers · Stealth Frigate",rd_nyxari:"Philosophical guardians of the known dimensions. They carry the weight of every absence — each lost pilot lives in their thoughts forever. They were the first to accept that closing the Dimensional Rift was worth any cost.",
+    rt_galrok:"The Iron Blades · Interceptor GR",rd_galrok:"Cold mercenaries who never cared about the cost of war — until this one. They fought alongside those they had hated for centuries and discovered something no calculation had predicted: that together, it worked. That it was worth it.",
+    rt_zelkaar:"The Walkers Between Worlds · Dark Frigate",rd_zelkaar:"Ancient travelers of dimensional passages. The paths they walked were marked with blood — and they know it cannot be undone. But when the space between worlds breathed free again, they knew it was enough.",
+    rt_karvel:"The Blood Nomads · Phantom",rd_karvel:"Guardians of the honor of the fallen. They remember every name, every face of those who did not return. Two hundred and forty-seven KAR'VEL left without return in this war — and the debt was paid by all who did not live to see the end.",
+    rt_lumfera:"Flesh and Machine · Green Phantom",rd_lumfera:"A collective consciousness that preserves every voice in its shared memory. Forty-two thousand voices were added to their eternal record in this war. They fought so that the races enslaved by the Vorrkai could be free.",
+    rt_scorchkai:"The Children of Twin Flame · Stealth Fighter",rd_scorchkai:"Warriors who spent their lives waiting for a worthy war. When it came, they fought like never before — and felt something no previous battle had given them: the feeling that every second was worth it. The best and most meaningful war of their lives.",
+    rt_valtho:"The Calculated Order · Strike Fighter",rd_valtho:"Analysts who model the probability of everything. Every casualty exceeded their models — what was given cannot be calculated. In the end, for the first time in their existence, they preferred not to know the probability of the future. They preferred simply to wait for it.",
+    sec_bazar:"Hub Bazar — Upgrade Shop",sub_bazar:"Between phases, visit the Scrap Bazar — trade accumulated points for upgrades that change the tide of battle",
+    bz_vida:"Extra Life",bz_vida_desc:"+1 extra life for the next phase",
+    bz_prop:"Thrusters Lv2",bz_prop_desc:"Increased speed and maneuverability",
+    bz_arma:"Weaponry Lv2",bz_arma_desc:"Maximum firepower with enhanced projectiles",
+    bz_bomb:"Bomb Depot",bz_bomb_desc:"+2 special bombs loaded for the next phase",
+    bz_escudo:"Reinforced Shield",bz_escudo_desc:"Increased impact resistance for one phase",
+    sec_dev:"Development Status",
+    dev1_t:"Game Core Complete",dev1_d:"18 phases, 18 bosses, 7 ships, shooting system, bombs, lives and collision",
+    dev2_t:"Original Art & Sprites",dev2_d:"All ships, bosses, enemies and scenarios with art created exclusively for the game",
+    dev3_t:"Cutscenes & Narrative",dev3_d:"Opening cutscenes, post-credits ending and between-phase narrative",
+    dev4_t:"Audio & Original Music",dev4_d:"Exclusive soundtrack and sound effects for all combat actions",
+    dev5_t:"Final Polish",dev5_d:"Advanced visual effects, extra mechanics, difficulty mode and expanded ranking",
+    dev6_t:"Steam Launch",dev6_d:"Expected within the next 6 months — with community support",
+    sec_trailer:"Gameplay in Action",trailer_sub:"Watch the official trailer and see real-time combat",
+    apoie_title:"Support the Project",
+    apoie_desc:"SETOR Z is almost ready. With your support we can finalize the last polishing, publish on Steam and continue developing extra content like new game modes, additional ships and story expansions. Every supporter secures the galaxy's future.",
+    tier1_label:"Recruit",tier1_desc:"Digital copy of the game on Steam",
+    tier2_label:"Pilot",tier2_desc:"Game + name in credits",
+    tier3_label:"Commander",tier3_desc:"Game + credits + early beta access",
+    btn_catarse:"Support on Catarse",btn_indiegogo:"Support on Indiegogo",
+    apoie_links:"Campaign links coming soon · Questions?",apoie_contact:"Get in touch",
+    footer_copy:"© 2026 Ninja Shadow Labs · All rights reserved",
+    footer_dev:"Developed by",footer_contact:"Contact the developer:"
+  },
+  es: {
+    nav_recursos:"Características",nav_naves:"Naves",nav_vorrkai:"Vorrkai",nav_racas:"Razas",nav_bazar:"Bazar",nav_bosses:"Jefes",nav_screenshots:"Capturas",nav_dev:"Estado",nav_apoie:"Apoyar",nav_btn:"Apoyar el Proyecto",
+    hero_badge:"En desarrollo · PC · Próximamente en Steam",
+    hero_desc:"Un épico space shooter donde las fronteras entre dimensiones se rompen. Pilota 7 naves únicas, enfrenta 18 jefes devastadores y salva el universo de la invasión Vorrkai en 18 intensas fases de combate.",
+    stat_fases:"Fases",stat_bosses:"Jefes",stat_naves:"Naves",stat_plataforma:"Plataforma",
+    btn_apoie:"Apoyar el Proyecto",btn_screenshots:"Ver Capturas",
+    sec_recursos:"Características del Juego",
+    ft_ships:"7 Naves Únicas",fd_ships:"Cada nave con apariencia, velocidad y sistema de propulsión distintos con arte original",
+    ft_bosses:"18 Jefes Épicos",fd_bosses:"Jefes masivos con patrones de ataque únicos, arte original y proyectiles exclusivos",
+    ft_fases:"18 Fases",fd_fases:"Entornos espaciales distintos: nebulosas, zonas de guerra y sectores dimensionales",
+    ft_cutscenes:"Cinemáticas",fd_cutscenes:"Historia narrada en paneles animados de apertura, fases y cierre épico",
+    ft_bombas:"Bombas Especiales",fd_bombas:"Arma de área con poder devastador para momentos críticos de combate",
+    ft_ranking:"Clasificación",fd_ranking:"Compite por la puntuación más alta e inscribe tu nombre en la gloria intergaláctica",
+    ft_musica:"Banda Sonora Original",fd_musica:"Música y efectos de sonido exclusivos para cada fase y momento de combate",
+    ft_rastros:"Estelas de Motor",fd_rastros:"Efecto de partículas en los propulsores de cada nave con colores y estilos únicos",
+    sec_naves:"Las 7 Naves",sub_naves:"Cada nave con características únicas de velocidad, potencia de fuego y defensa — desliza para ver todas",
+    sd_p1:"Furtiva y resistente. Difícil de detectar. Disparos dobles de plasma morado.",
+    sd_p2:"Alta velocidad. Ideal para hit-and-run. Tres cañones de energía verde.",
+    sd_p3:"Alta furtividad. Opera en las sombras. Disparo doble de alta precisión.",
+    sd_p4:"Diseño exótico. Potencia de fuego elevada. Cuatro turbinas multicolores.",
+    sd_p5:"Versión verde. Más escudo, menos velocidad. Triple disparo cósmico.",
+    sd_p6:"Compacto y rápido. Alta evasión. Cañones azul-blancos de alta cadencia.",
+    sd_p7:"Especialista en ataque. Daño máximo. Propulsión naranja-negra devastadora.",
+    sec_bosses:"18 Jefes",sub_bosses:"Cada jefe con arte original, patrón de ataque único y proyectiles exclusivos",
+    sec_screenshots:"Capturas de Pantalla",sub_screenshots:"18 entornos espaciales únicos — desde nebulosas hasta sectores dimensionales",
+    sec_historia:"La Historia",sub_historia:"Cuando la Brecha Dimensional se abre, la invasión Vorrkai comienza — narrada en cinemáticas animadas",
+    sec_vorrkai:"Los Vorrkai",sub_vorrkai:"400 años de conquista. Galaxias enteras consumidas. Ahora es nuestro turno de resistir.",
+    vorrkai_h3:"La Amenaza que Vino del Más Allá",
+    vorrkai_p1:"Hace cuatro siglos, los Vorrkai surgieron de las profundidades de una dimensión sin nombre — una civilización que no construye, no negocia, no coexiste. Ellos <strong>consumen</strong>. Mundos enteros reducidos a materia prima. Pueblos absorbidos, sus memorias y culturas borradas como datos corruptos.",
+    vorrkai_p2:"En 400 años de expansión ininterrumpida, los Vorrkai barrieron 14 sistemas estelares, subyugaron 37 civilizaciones y eliminaron todo lo que no podían controlar. Su flota es imparable. Sus máquinas de guerra, incomprensibles en tamaño y violencia. Y ahora — por primera vez en su historia — encontraron resistencia.",
+    vorrkai_p3:"La Brecha Dimensional abierta sobre el SECTOR Z no es solo una invasión. Es el principio del fin — a menos que siete razas que nunca se aliaron antes decidan luchar juntas.",
+    vsl_anos:"Años de conquista",vsl_sistemas:"Sistemas destruidos",vsl_civs:"Civilizaciones subyugadas",
+    sec_racas:"Las 7 Razas Aliadas",sub_racas:"Cuando la Brecha Dimensional se abrió, siete civilizaciones enemigas dejaron sus guerras de lado y unieron fuerzas contra la invasión Vorrkai",
+    rt_nyxari:"Los Tejedores de Mente · Stealth Frigate",rd_nyxari:"Guardianes filosóficos de las dimensiones conocidas. Cargan el peso de cada ausencia — cada piloto perdido vive en sus pensamientos para siempre. Fueron los primeros en aceptar que cerrar la Brecha Dimensional valía cualquier costo.",
+    rt_galrok:"Las Hojas de Hierro · Interceptor GR",rd_galrok:"Mercenarios fríos que nunca se preocuparon por el costo de una guerra — hasta esta. Lucharon junto a quienes odiaron durante siglos y descubrieron algo que ningún cálculo había previsto: que juntos, funcionaba. Que valía la pena.",
+    rt_zelkaar:"Los Caminantes Entre Mundos · Dark Frigate",rd_zelkaar:"Viajeros ancestrales de los pasajes dimensionales. Los caminos que recorrieron quedaron marcados con sangre — y saben que eso no se borra. Pero cuando el espacio entre los mundos respiró libre de nuevo, supieron que fue suficiente.",
+    rt_karvel:"Los Nómadas de Sangre · Phantom",rd_karvel:"Guardianes del honor de los caídos. Recuerdan cada nombre, cada rostro de todos los que no regresaron. Doscientos cuarenta y siete KAR'VEL partieron sin retorno en esta guerra — y la deuda fue pagada por todos los que no vivieron para ver el final.",
+    rt_lumfera:"Carne y Máquina · Green Phantom",rd_lumfera:"Conciencia colectiva que preserva cada voz en su memoria compartida. Cuarenta y dos mil voces fueron añadidas a su registro eterno en esta guerra. Lucharon para que las razas esclavizadas por los Vorrkai pudieran ser libres.",
+    rt_scorchkai:"Los Hijos de la Doble Llama · Stealth Fighter",rd_scorchkai:"Guerreros que pasaron la vida esperando una guerra a la altura. Cuando llegó, lucharon como nunca — y sintieron algo que ninguna batalla anterior les había dado: la sensación de que cada segundo valió. La mejor y más significativa guerra de sus vidas.",
+    rt_valtho:"El Orden Calculado · Strike Fighter",rd_valtho:"Analistas que modelan probabilidades de todo. Cada baja superó sus modelos — lo que fue dado no puede calcularse. Al final, por primera vez en su existencia, prefirieron no conocer la probabilidad del futuro. Prefirieron simplemente esperarlo.",
+    sec_bazar:"Hub Bazar — Tienda de Mejoras",sub_bazar:"Entre fases, visita el Bazar de Chatarra — cambia puntos acumulados por mejoras que cambian el rumbo de la batalla",
+    bz_vida:"Vida Extra",bz_vida_desc:"+1 vida extra para la siguiente fase",
+    bz_prop:"Propulsores Nv2",bz_prop_desc:"Velocidad y maniobrabilidad aumentadas",
+    bz_arma:"Armamento Nv2",bz_arma_desc:"Máxima potencia de fuego con proyectiles mejorados",
+    bz_bomb:"Depósito de Bombas",bz_bomb_desc:"+2 bombas especiales cargadas para la siguiente fase",
+    bz_escudo:"Escudo Reforzado",bz_escudo_desc:"Resistencia al impacto aumentada por una fase",
+    sec_dev:"Estado de Desarrollo",
+    dev1_t:"Núcleo del Juego Completo",dev1_d:"18 fases, 18 jefes, 7 naves, sistema de disparos, bombas, vidas y colisión",
+    dev2_t:"Arte y Sprites Originales",dev2_d:"Todas las naves, jefes, enemigos y escenarios con arte creado exclusivamente para el juego",
+    dev3_t:"Cinemáticas y Narrativa",dev3_d:"Cinemáticas de apertura, cierre post-créditos y narrativa entre fases",
+    dev4_t:"Audio y Música Original",dev4_d:"Banda sonora y efectos de sonido exclusivos para todas las acciones de combate",
+    dev5_t:"Pulido Final",dev5_d:"Efectos visuales avanzados, mecánicas adicionales, modo de dificultad y clasificación ampliada",
+    dev6_t:"Lanzamiento en Steam",dev6_d:"Previsto para los próximos 6 meses — con el apoyo de la comunidad",
+    sec_trailer:"Gameplay en Acción",trailer_sub:"Mira el tráiler oficial y observa el combate en tiempo real",
+    apoie_title:"Apoyar el Proyecto",
+    apoie_desc:"SETOR Z está casi listo. Con tu apoyo podemos finalizar los últimos pulidos, publicar en Steam y continuar desarrollando contenido extra como nuevos modos de juego, naves adicionales y expansiones de historia. Cada apoyador garantiza el futuro de la galaxia.",
+    tier1_label:"Recluta",tier1_desc:"Copia digital del juego en Steam",
+    tier2_label:"Piloto",tier2_desc:"Juego + nombre en créditos",
+    tier3_label:"Comandante",tier3_desc:"Juego + créditos + acceso anticipado a beta",
+    btn_catarse:"Apoyar en Catarse",btn_indiegogo:"Apoyar en Indiegogo",
+    apoie_links:"Enlaces de campaña próximamente · ¿Preguntas?",apoie_contact:"Contáctanos",
+    footer_copy:"© 2026 Ninja Shadow Labs · Todos los derechos reservados",
+    footer_dev:"Desarrollado por",footer_contact:"Contacta al desarrollador:"
+  }
+};
+
+function setLang(lang) {
+  var t = I18N[lang]; if (!t) return;
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var k = el.getAttribute('data-i18n'); if (t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var k = el.getAttribute('data-i18n-html'); if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('sz-lang', lang); } catch(e) {}
+}
+
+document.querySelectorAll('.lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { setLang(btn.getAttribute('data-lang')); });
+});
+(function() {
+  var s = 'pt'; try { s = localStorage.getItem('sz-lang') || 'pt'; } catch(e) {}
+  if (s !== 'pt') setLang(s);
+})();
+
+/* ============================================================
+   STARS
+   ============================================================ */
 (function () {
   var c = document.getElementById('stars'), ctx = c.getContext('2d'), W, H, s = [];
   function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
@@ -847,6 +1083,9 @@
   resize(); init(); draw();
 })();
 
+/* ============================================================
+   VORRKAI BOT
+   ============================================================ */
 (function () {
   var msgs = [
     "Sua presença foi registrada nos arquivos Vorrkai...",
@@ -891,6 +1130,9 @@
   setTimeout(typeNext, 1500);
 })();
 
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
 (function () {
   var els = document.querySelectorAll('.rv');
   var ob = new IntersectionObserver(function(e) {
@@ -899,6 +1141,9 @@
   els.forEach(function(el){ ob.observe(el); });
 })();
 
+/* ============================================================
+   MUSIC BUTTON
+   ============================================================ */
 (function () {
   var bgm = document.getElementById('bgm');
   var btn = document.getElementById('music-btn');
